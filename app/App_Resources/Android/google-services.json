@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "74289603371-320b5b20uqkkv9ek9o0mlp7elkh0hb5n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.daboiz.teamwork",
+            "certificate_hash": "283943a68f3e1d3e1bc2fc93f110845e681b544d"
+          }
+        },
+        {
           "client_id": "74289603371-rt9h8p07vbotphd6jkk100t8gfd251j6.apps.googleusercontent.com",
           "client_type": 3
         }
