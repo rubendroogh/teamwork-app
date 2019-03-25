@@ -14,6 +14,7 @@
 
 <script lang="ts">
     const firebase = require("nativescript-plugin-firebase");
+    import App from './App.vue';
 
     export default {
         data(){
@@ -35,6 +36,7 @@
                 }).then(
                     function (result) {
                         console.log(result);
+                        
                     },
                     function (errorMessage) {
                         console.log(errorMessage);

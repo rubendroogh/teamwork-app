@@ -1,5 +1,6 @@
 import Vue from 'nativescript-vue';
 import Login from './components/Login.vue';
+import App from './components/App.vue';
 import VueDevtools from 'nativescript-vue-devtools';
 
 const firebase = require("nativescript-plugin-firebase");
@@ -24,6 +25,16 @@ if(TNS_ENV !== 'production') {
 }
 // Prints Vue logs when --env.production is *NOT* set while building
 Vue.config.silent = (TNS_ENV === 'production');
+
+// firebase.getCurrentUser().then(user => {
+//   if(user.id){
+//     new Vue({
+//       render: h => h('frame', [h(App)])
+//     }).$start();
+//   } else{
+    
+//   }
+// })
 
 new Vue({
   render: h => h('frame', [h(Login)])

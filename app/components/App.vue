@@ -1,10 +1,8 @@
 <template>
     <Page class="page">
       <ActionBar title="Teamwork!" class="action-bar"/>
-      <GridLayout columns="*" rows="*, *, *">
+      <GridLayout columns="*" rows="*">
           <Label class="message" :text="msg" col="0" row="0"/>
-          <TextField v-model="name" col="0" row="1"/>
-          <Button text="Save" @tap="saveData" col="0" row="2"/>
       </GridLayout>
     </Page>
 </template>
@@ -15,9 +13,7 @@
   export default {
     data() {
       return {
-        msg: 'Vul je ellende in!',
-        name: '',
-        users: {}
+        msg: 'Je bent ingelogd!'
       }
     },
     mounted(){
