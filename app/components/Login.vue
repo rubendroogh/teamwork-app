@@ -13,6 +13,7 @@
 
 <script lang="ts">
     const firebase = require("nativescript-plugin-firebase");
+    import {Telephony} from 'nativescript-telephony';
     import App from './App.vue'
 
     export default {
@@ -27,6 +28,7 @@
                     this.$navigateTo(App)
                 }).catch(error => {
                     console.log(`Error: ${error}`)
+                    this.getTelephoneNumber()
                 })
             }, 10);
         },
@@ -47,6 +49,15 @@
                         this.$navigateTo(App)
                     }
                 );
+            },
+            getTelephoneNumber(){
+                Telephony().then(resolved => {
+                    if (resolved.phoneNumber !== "") {
+                        this.phoneNumber = resolved.phoneNumber
+                    }
+                }).catch(error => {
+                    console.dir(error);
+                })
             }
         }
     }
