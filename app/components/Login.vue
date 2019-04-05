@@ -6,7 +6,6 @@
                 <Label text="Enter your phone number:" />
                 <TextField v-model="phonenum" hint="Enter phone number..."/>
                 <Button text="Submit" @tap="submit" class="button"/>
-                <Button text="Check login" @tap="checkLogin" class="button"/>
             </StackLayout>
         </GridLayout>
     </Page>
@@ -14,35 +13,40 @@
 
 <script lang="ts">
     const firebase = require("nativescript-plugin-firebase");
+    import App from './App.vue'
 
     export default {
         data(){
             return {
-                phonenum: ''
+                phonenum: '+316'
             }
         },
         mounted(){
-
+            setTimeout(() => {
+                this.$firebase.getCurrentUser().then(user => {
+                    this.$navigateTo(App)
+                }).catch(error => {
+                    console.log(`Error: ${error}`)
+                })
+            }, 10);
         },
         methods: {
             submit(){
-                firebase.login({
+                this.$firebase.login({
                     type: firebase.LoginType.PHONE,
                     phoneOptions: {
                         phoneNumber: this.phonenum,
                         verificationPrompt: "The received verification code" // default "Verification code"
                     }
                 }).then(
-                    function (result) {
-                        console.log(result);
+                    result => {
+                        this.$navigateTo(App)
                     },
-                    function (errorMessage) {
-                        console.log(errorMessage);
+                    errorMessage => {
+                        console.log(`Error: ${errorMessage}`)
+                        this.$navigateTo(App)
                     }
                 );
-            },
-            checkLogin(){
-                firebase.getCurrentUser().then(user => {console.log(user)})
             }
         }
     }
@@ -53,6 +57,6 @@
         padding: 20;
     }
     .button{
-        background-color: gold;
+        background-color: rgb(77, 209, 226);
     }
 </style>
