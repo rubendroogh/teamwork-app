@@ -111,13 +111,34 @@
         methods: {
             getResultsAndContinue(){
                 if (this.allEntered) {
-                    let results = [ 0, 0, 0, 0, 0 ]
+                    let results = [
+                        {
+                            text: "Afwezigheid van vertrouwen.",
+                            score: 0
+                        },
+                        {
+                            text: "Angst voor conflicten.",
+                            score: 0
+                        },
+                        {
+                            text: "Een gebrek aan betrokkenheid.",
+                            score: 0
+                        },
+                        {
+                            text: "Vermijden van verantwoordelijkheid.",
+                            score: 0
+                        },
+                        {
+                            text: "Verwaarlozing van de resultaten.",
+                            score: 0
+                        },
+                    ]
 
                     results.forEach((value, index) => {
                         this.statements.filter(statement => {
                             return statement.frustration === (index + 1)
                         }).forEach(s => {
-                            results[index] += s.score
+                            results[index].score += s.score
                         })
                     })
 
