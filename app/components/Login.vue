@@ -14,18 +14,18 @@
 <script lang="ts">
     const firebase = require("nativescript-plugin-firebase");
     import {Telephony} from 'nativescript-telephony';
-    import App from './App.vue'
+    import Introduction from './teamtest/Introduction.vue'
 
     export default {
         data(){
             return {
-                phonenum: '+316'
+                phonenum: '+31636572279'
             }
         },
         mounted(){
             setTimeout(() => {
                 this.$firebase.getCurrentUser().then(user => {
-                    this.$navigateTo(App)
+                    this.$navigateTo(Introduction)
                 }).catch(error => {
                     console.log(`Error: ${error}`)
                     this.getTelephoneNumber()
@@ -42,11 +42,11 @@
                     }
                 }).then(
                     result => {
-                        this.$navigateTo(App)
+                        this.$navigateTo(Introduction)
                     },
                     errorMessage => {
                         console.log(`Error: ${errorMessage}`)
-                        this.$navigateTo(App)
+                        this.$navigateTo(Introduction)
                     }
                 );
             },

@@ -8,3 +8,23 @@
 
 // Global SCSS styling
 // @see https://docs.nativescript.org/ui/styling
+
+.content{
+    padding: 20;
+}
+
+.page-title{
+    text-align: center;
+    font-size: 24;
+    font-weight: bold;
+}
+
+.page-text{
+    text-align: center;
+    font-size: 15;
+    padding: 10 0;
+}
+
+.italic{
+    font-style: italic;
+}
