@@ -134,6 +134,7 @@
                         },
                     ]
 
+                    // get all values and put them in the right place
                     results.forEach((value, index) => {
                         this.statements.filter(statement => {
                             return statement.frustration === (index + 1)
@@ -142,6 +143,11 @@
                         })
                     })
                     
+                    // sort scores
+                    results = results.sort((a, b) => {
+                        return a.score - b.score
+                    })
+
                     this.$navigateTo(Results, {
                         transitionAndroid: {
                             name: "slide"
