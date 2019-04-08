@@ -141,8 +141,6 @@
                             results[index].score += s.score
                         })
                     })
-
-                    console.dir(results)
                     
                     this.$navigateTo(Results, {
                         transitionAndroid: {
