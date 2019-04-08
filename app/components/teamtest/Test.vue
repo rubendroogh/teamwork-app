@@ -112,18 +112,16 @@
             getResultsAndContinue(){
                 if (this.allEntered) {
                     let results = [ 0, 0, 0, 0, 0 ]
-                    let discontinue = false
 
-                    results.forEach((index) => {
+                    results.forEach((value, index) => {
                         this.statements.filter(statement => {
                             return statement.frustration === (index + 1)
                         }).forEach(s => {
-                            if(s.score === 0){
-                                discontinue = true
-                            }
                             results[index] += s.score
                         })
                     })
+
+                    console.dir(results)
                     
                     this.$navigateTo(Results, {
                         transitionAndroid: {
