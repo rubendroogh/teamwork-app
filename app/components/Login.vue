@@ -12,9 +12,9 @@
 </template>
 
 <script lang="ts">
-    const firebase = require("nativescript-plugin-firebase");
-    import {Telephony} from 'nativescript-telephony';
-    import Introduction from './teamtest/Introduction.vue'
+    const firebase = require("nativescript-plugin-firebase")
+    import {Telephony} from 'nativescript-telephony'
+    import TeamMenu from './Team/TeamMenu.vue'
 
     export default {
         data(){
@@ -25,7 +25,7 @@
         mounted(){
             setTimeout(() => {
                 this.$firebase.getCurrentUser().then(user => {
-                    this.$navigateTo(Introduction)
+                    this.$navigateTo(TeamMenu)
                 }).catch(error => {
                     console.log(`Error: ${error}`)
                     this.getTelephoneNumber()
@@ -42,11 +42,11 @@
                     }
                 }).then(
                     result => {
-                        this.$navigateTo(Introduction)
+                        this.$navigateTo(TeamMenu)
                     },
                     errorMessage => {
                         console.log(`Error: ${errorMessage}`)
-                        this.$navigateTo(Introduction)
+                        this.$navigateTo(TeamMenu)
                     }
                 );
             },
