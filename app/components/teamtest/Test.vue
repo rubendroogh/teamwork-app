@@ -11,9 +11,9 @@
                     <StackLayout class="statement-container">
                         <Label :textWrap="true" :text="statement.text" />
                         <GridLayout class="statement-button-container" columns="*, *, *" rows="*">
-                            <Button col="0" text="Zelden" :class="{ selected: statement.score == 1 }" @tap="statement.score = 1" />
-                            <Button col="1" text="Soms" :class="{ selected: statement.score == 2 }" @tap="statement.score = 2" />
-                            <Button col="2" text="Meestal" :class="{ selected: statement.score == 3 }" @tap="statement.score = 3" />
+                            <Button col="0" text="Zelden" class="score-button" :class="{ selected: statement.score == 1 }" @tap="statement.score = 1" />
+                            <Button col="1" text="Soms" class="score-button" :class="{ selected: statement.score == 2 }" @tap="statement.score = 2" />
+                            <Button col="2" text="Meestal" class="score-button" :class="{ selected: statement.score == 3 }" @tap="statement.score = 3" />
                         </GridLayout>
                     </StackLayout>
                 </v-template>
@@ -136,6 +136,7 @@
 
                     // get all values and put them in the right place
                     results.forEach((value, index) => {
+                        // get all statements that fit the frustration
                         this.statements.filter(statement => {
                             return statement.frustration === (index + 1)
                         }).forEach(s => {
@@ -168,12 +169,25 @@
 </script>
 
 <style lang="scss" scoped>
+    .score-button{
+        background-color: white;
+    }
+    
+    .selected{
+        background-color: rgb(158, 154, 219);
+    }
+
+    .disabled{
+        opacity: .3;
+    }
+    
     .statement-container{
-        padding: 20;
+        padding: 30 20;
         border: none;
 
         Label{
             text-align: center;
+            font-size: 16;
         }
 
         .statement-button-container{
@@ -185,11 +199,4 @@
         margin: 10;
     }
 
-    .selected{
-        background-color: red;
-    }
-
-    .disabled{
-        opacity: .3;
-    }
 </style>
