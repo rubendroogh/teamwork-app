@@ -13,7 +13,7 @@
             </StackLayout>
 
             <StackLayout col="1" >
-                <Label text="Safety check" class="card" backgroundColor="lightblue" height="180" @tap="$navigateTo(SafetyCheck)" />
+                <Label text="Safety check" class="card" backgroundColor="lightblue" height="180" @tap="$navigateTo(safetyCheckIntroduction)" />
                 <Label text="Mijn profiel" class="card" backgroundColor="yellow" height="150" @tap="$navigateTo(MyProfile)" />
             </StackLayout>
             
@@ -22,12 +22,14 @@
 </template>
 
 <script>
-    import Introduction from '../TeamTest/Introduction.vue'
+    import TestIntroduction from '../TeamTest/Introduction.vue'
+    import CheckIntroduction from '../SafetyCheck/Introduction.vue'
 
     export default {
         data() {
             return {
-                teamTestComponent: Introduction
+                teamTestComponent: Introduction,
+                safetyCheckIntroduction: CheckIntroduction
             };
         }
     };
