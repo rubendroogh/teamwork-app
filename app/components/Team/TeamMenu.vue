@@ -1,11 +1,15 @@
 <template>
     <Page class="page">
-        <ActionBar title="My Team" class="action-bar" />
+        <ActionBar>
+            <StackLayout orientation="horizontal">
+                <Label text="Mijn team" class="page-title" verticalAlignment="center" />
+            </StackLayout>
+        </ActionBar>
         <GridLayout columns="*,*" rows="*" width="*" height="*" margin="20" verticalAlignment="top">
 
             <StackLayout col="0" >
                 <Label text="Deelnemers" class="card" backgroundColor="red" height="150" @tap="$navigateTo(TeamMembers)"/>
-                <Label text="Start de test" class="card" backgroundColor="green" height="180" @tap="$navigateTo(Test)" />
+                <Label text="Team Test" class="card" backgroundColor="green" height="180" @tap="$navigateTo(teamTestComponent)" />
             </StackLayout>
 
             <StackLayout col="1" >
@@ -18,9 +22,13 @@
 </template>
 
 <script>
+    import Introduction from '../TeamTest/Introduction.vue'
+
     export default {
         data() {
-            return {};
+            return {
+                teamTestComponent: Introduction
+            };
         }
     };
 </script>
