@@ -9,11 +9,11 @@
 
             <StackLayout col="0" >
                 <Label text="Deelnemers" class="card" backgroundColor="red" height="150" @tap="$navigateTo(TeamMembers)"/>
-                <Label text="Team Test" class="card" backgroundColor="green" height="180" @tap="$navigateTo(teamTestComponent)" />
+                <Label text="Team Test" class="card" backgroundColor="lightgreen" height="180" @tap="$navigateTo(teamTestComponent)" />
             </StackLayout>
 
             <StackLayout col="1" >
-                <Label text="Safety check" class="card" backgroundColor="blue" height="180" @tap="$navigateTo(SafetyCheck)" />
+                <Label text="Safety check" class="card" backgroundColor="lightblue" height="180" @tap="$navigateTo(SafetyCheck)" />
                 <Label text="Mijn profiel" class="card" backgroundColor="yellow" height="150" @tap="$navigateTo(MyProfile)" />
             </StackLayout>
             
