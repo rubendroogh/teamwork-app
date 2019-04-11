@@ -36,7 +36,7 @@
                         frustration: 2
                     },
                     {
-                        text: "Teamleden spreken elkaar aan op tekortkomingen en onproductieve gedragingen.",
+                        text: "Teamleden spreken elkaar aan op tekortkomingen en onproductief gedrag.",
                         score: 0,
                         frustration: 4
                     },
@@ -46,27 +46,27 @@
                         frustration: 3
                     },
                     {
-                        text: "Teamleden verontschuldigen zich snel en oprecht tegenover elkaar wanneer zij iets zeggen of doen dat ongepast is of het team kan schaden.",
+                        text: "Teamleden verontschuldigen zich snel en oprecht tegenover elkaar wanneer zij iets zeggen of doen dat ongepast is.",
                         score: 0,
                         frustration: 1
                     },
                     {
-                        text: "Omwille van het teambelang zijn teamleden bereid hop him afdelingen of de terreinen waarop zij deskundig zijn offers te brengen in termen van budgetten, zeggenschap of het aantal personeelsleden.",
+                        text: "Teamleden zijn bereid offers te maken binnen hun afdelingen voor het teambelang.",
                         score: 0,
                         frustration: 5
                     },
                     {
-                        text: "Teamleden geven openlijk hun zwakheden en fouten toe.",
+                        text: "Teamleden geven openlijk en eerlijk hun zwakheden en fouten toe",
                         score: 0,
                         frustration: 1
                     },
                     {
-                        text: "Teamvergaderingen zijn fascinerend en niet vervelend.",
+                        text: "Teamvergaderingen zijn interessant en niet vervelend.",
                         score: 0,
                         frustration: 2
                     },
                     {
-                        text: "Als teamleden vergaderingen verlaten, vertrouwen zij erop dat collega's zich zonder voorbehoud zullen scharen achter de besluiten waarover overeenstemming wordt bereikt, ook als er aanvankelijk onenigheid heerste.",
+                        text: "Als teamleden vergaderingen verlaten, vertrouwen zij erop dat collega's achter de besluiten staan waarover overeenstemming is bereikt, ook als er aanvankelijk onenigheid heerste.",
                         score: 0,
                         frustration: 3
                     },
@@ -81,7 +81,7 @@
                         frustration: 2
                     },
                     {
-                        text: "Teamleden maken zich grote zorgen over het vooruitzicht hun collega's af te vallen.",
+                        text: "Teamleden maken zich grote zorgen over het vooruitzicht hun collega's teleur te stellen.",
                         score: 0,
                         frustration: 4
                     },
