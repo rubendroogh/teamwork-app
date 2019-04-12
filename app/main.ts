@@ -1,14 +1,23 @@
 import Vue from 'nativescript-vue';
-import App from './components/App.vue';
-import VueDevtools from 'nativescript-vue-devtools';
+import Login from './components/Login.vue';
 
-if(TNS_ENV !== 'production') {
-  Vue.use(VueDevtools);
-}
-// Prints Vue logs when --env.production is *NOT* set while building
-Vue.config.silent = (TNS_ENV === 'production');
+const firebase = require("nativescript-plugin-firebase");
 
+firebase.init({
+  onAuthStateChanged: function(data) {
+    Vue.prototype.$loggedIn = data.loggedIn;
+  }
+}).then(
+  () => {
+    console.log("firebase.init done");
+  },
+  error => {
+    console.log(`firebase.init error: ${error}`);
+  }
+);
+
+Vue.prototype.$firebase = firebase;
 
 new Vue({
-  render: h => h('frame', [h(App)])
+  render: h => h('frame', [h(Login)])
 }).$start();
