@@ -24,9 +24,13 @@
 </template>
 
 <script>
+    import Events  from './events/Events.vue'
+
     export default {
         data() {
-            return {};
+            return {
+                Events: Events
+            };
         }
     };
 </script>
