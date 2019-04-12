@@ -7,7 +7,7 @@
                 <Label text="Deelnemers" class="card"
                     backgroundColor="#C70039" height="150" @tap="$navigateTo(Members)"/>
                 <Label text="Tests" class="card"
-                    backgroundColor="#19564c" height="180" @tap="$navigateTo(teamTestComponent)" />
+                    backgroundColor="#19564c" height="180" @tap="$navigateTo(teamTestIntroduction)" />
                 <Label text="Events" class="card"
                     backgroundColor="#f3814d" height="180" @tap="$navigateTo(Events)" />
             </StackLayout>
@@ -31,7 +31,7 @@
     export default {
         data() {
             return {
-                teamTestComponent: TestIntroduction,
+                teamTestIntroduction: TestIntroduction,
                 safetyCheckIntroduction: CheckIntroduction,
                 Events: Events
             };
