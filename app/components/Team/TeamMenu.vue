@@ -28,7 +28,7 @@
     export default {
         data() {
             return {
-                teamTestComponent: Introduction,
+                teamTestComponent: TestIntroduction,
                 safetyCheckIntroduction: CheckIntroduction
             };
         }
