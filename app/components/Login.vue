@@ -13,6 +13,7 @@
     const firebase = require("nativescript-plugin-firebase")
     import {Telephony} from 'nativescript-telephony'
     import TeamMenu from './TeamMenu.vue'
+    import RegisterName from './RegisterName.vue'
 
     export default {
         data(){
@@ -40,11 +41,11 @@
                     }
                 }).then(
                     result => {
-                        this.$navigateTo(TeamMenu)
+                        this.$navigateTo(RegisterName)
                     },
                     errorMessage => {
                         console.log(`Error: ${errorMessage}`)
-                        this.$navigateTo(TeamMenu)
+                        this.$navigateTo(RegisterName)
                     }
                 );
             },
