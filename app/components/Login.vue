@@ -1,12 +1,10 @@
 <template>
-    <Page>
-        <ActionBar title="Login" />
-        <GridLayout columns="*" rows="*, auto, *">
-            <StackLayout row="1">
-                <Label text="Enter your phone number:" />
-                <TextField v-model="phonenum" hint="Enter phone number..."/>
-                <Button text="Submit" @tap="submit" class="button"/>
-            </StackLayout>
+    <Page :actionBarHidden="true" >
+        <GridLayout columns="*" rows="80, auto, 80, auto, auto, *, auto">
+            <Image src="~/assets/images/logo.png" row="1" />
+            <Label :textWrap="true" class="hint" text="Voer je telefoonnummer in om een account aan te maken." row="3"/>
+            <TextField v-model="phonenum" hint="Enter phone number..." row="4"/>
+            <Button text="Submit" @tap="submit" class="button" row="6"/>
         </GridLayout>
     </Page>
 </template>
@@ -14,7 +12,7 @@
 <script lang="ts">
     const firebase = require("nativescript-plugin-firebase")
     import {Telephony} from 'nativescript-telephony'
-    import TeamMenu from './Team/TeamMenu.vue'
+    import TeamMenu from './TeamMenu.vue'
 
     export default {
         data(){
@@ -67,7 +65,12 @@
     GridLayout{
         padding: 20;
     }
+    .hint{
+        text-align: center;
+        padding: 30 0 15;
+    }
     .button{
-        background-color: rgb(77, 209, 226);
+        background-color: #3498DB;
+        color: white;
     }
 </style>
