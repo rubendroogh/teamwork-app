@@ -4,36 +4,27 @@
         <GridLayout columns="*,*" rows="*" width="*" height="*" margin="20"
             verticalAlignment="top">
             <StackLayout col="0" >
-                <Label text="Deelnemers" class="card"
-                    backgroundColor="#C70039" height="150" @tap="$navigateTo(Members)"/>
                 <Label text="Tests" class="card"
                     backgroundColor="#19564c" height="180" @tap="$navigateTo(teamTestIntroduction)" />
-                <Label text="Events" class="card"
-                    backgroundColor="#f3814d" height="180" @tap="$navigateTo(Events)" />
             </StackLayout>
             <StackLayout col="1">
                 <Label text="Safety check" class="card"
                     backgroundColor="#006080" height="180" @tap="$navigateTo(safetyCheckIntroduction)" />
-                <Label text="Tips & Tricks" class="card"
-                    backgroundColor="#f7c741" height="150" @tap="$navigateTo(Tips)" />
-                <Label text="links" class="card"
-                    backgroundColor="#77c9f8" height="180" @tap="$navigateTo(Links)" />
             </StackLayout>  
         </GridLayout>
     </Page>
 </template>
 
 <script>
-    import TestIntroduction from '../TeamTest/Introduction.vue'
-    import CheckIntroduction from '../SafetyCheck/Introduction.vue'
-    import Events from './events/Events.vue'
+    import TestIntroduction from './TeamTest/Introduction.vue'
+    import CheckIntroduction from './SafetyCheck/Introduction.vue'
+    // import Events from '../events/Events.vue'
 
     export default {
         data() {
             return {
                 teamTestIntroduction: TestIntroduction,
-                safetyCheckIntroduction: CheckIntroduction,
-                Events: Events
+                safetyCheckIntroduction: CheckIntroduction
             };
         }
     };
