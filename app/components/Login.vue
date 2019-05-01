@@ -4,7 +4,7 @@
             <Image src="~/assets/images/logo.png" row="1" />
             <Label :textWrap="true" class="hint" text="Voer je telefoonnummer in om een account aan te maken." row="3"/>
             <TextField v-model="phonenum" hint="Enter phone number..." row="4"/>
-            <Button text="Submit" @tap="submit" class="button" row="6"/>
+            <Button text="Verstuur code" @tap="submit" class="button" row="6"/>
         </GridLayout>
     </Page>
 </template>

@@ -5,11 +5,11 @@
             verticalAlignment="top">
             <StackLayout col="0" >
                 <Label text="Tests" class="card"
-                    backgroundColor="#19564c" height="180" @tap="$navigateTo(teamTestIntroduction)" />
+                    backgroundColor="green" height="180" @tap="$navigateTo(teamTestIntroduction)" />
             </StackLayout>
             <StackLayout col="1">
                 <Label text="Safety check" class="card"
-                    backgroundColor="#006080" height="180" @tap="$navigateTo(safetyCheckIntroduction)" />
+                    backgroundColor="blue" height="180" @tap="$navigateTo(safetyCheckIntroduction)" />
             </StackLayout>  
         </GridLayout>
     </Page>
@@ -18,7 +18,6 @@
 <script>
     import TestIntroduction from './TeamTest/Introduction.vue'
     import CheckIntroduction from './SafetyCheck/Introduction.vue'
-    // import Events from '../events/Events.vue'
 
     export default {
         data() {
