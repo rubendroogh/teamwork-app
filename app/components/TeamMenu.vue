@@ -1,6 +1,6 @@
 <template>
-    <Page class="page">
-        <ActionBar title="My Team" class="action-bar" />
+    <Page>
+        <ActionBar title="My Team"/>
         <GridLayout columns="*,*" rows="*" width="*" height="*" margin="20"
             verticalAlignment="top">
             <StackLayout col="0" >
