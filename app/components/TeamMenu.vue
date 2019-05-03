@@ -1,7 +1,7 @@
 <template>
     <Page>
         <CustomActionBar/>
-        <GridLayout columns="*,*" rows="*" width="*" height="*" margin="20"
+        <GridLayout v-if="hasTeam" columns="*,*" rows="*" width="*" height="*" margin="20"
             verticalAlignment="top">
             <StackLayout col="0" >
                 <Label text="Tests" class="card"
@@ -12,6 +12,9 @@
                     backgroundColor="blue" height="180" @tap="$navigateTo(safetyCheckIntroduction)" />
             </StackLayout>  
         </GridLayout>
+        <StackLayout v-else>
+            <Label text="Geen team!" />
+        </StackLayout>
     </Page>
 </template>
 
@@ -28,8 +31,12 @@
         data() {
             return {
                 teamTestIntroduction: TestIntroduction,
-                safetyCheckIntroduction: CheckIntroduction
+                safetyCheckIntroduction: CheckIntroduction,
+                hasTeam: false
             };
+        },
+        mounted(){
+            // Check if team exists
         }
     };
 </script>
