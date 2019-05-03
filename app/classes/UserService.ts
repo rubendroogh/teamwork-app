@@ -1,5 +1,3 @@
-// const firebase = require("nativescript-plugin-firebase")
-
 interface IUser {
     uid: string
     name: string
@@ -11,12 +9,19 @@ export default class UserService implements IUser {
     name: string
     teams: Array<string>
     firebase: any
+    userDoc: any
 
     constructor(uid: string, firebaseRef: any){
         this.uid = uid
         this.firebase = firebaseRef
 
-        
+        let data = {
+            name: '',
+            teams: []
+        }
+
+        // Create document in firestore
+        this.userDoc = this.firebase.firestore.collection('users').doc(this.uid).set(data)
     }
 
     public getName(){
@@ -29,6 +34,12 @@ export default class UserService implements IUser {
 
     public getTeams(){
         return this.teams
+    }
+
+    public setName(name: string){
+        this.name = name
+
+
     }
 
     public setUid(uid: string){

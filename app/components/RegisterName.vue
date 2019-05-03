@@ -2,9 +2,9 @@
     <Page :actionBarHidden="true" >
         <GridLayout columns="*" rows="80, auto, 80, auto, auto, *, auto">
             <Label :textWrap="true" class="lead" text="Je account is succesvol geactiveerd!" row="1"/>
-            <Label :textWrap="true" class="hint" text="Voer je voor en achternaam in om door te gaan. " row="2"/>
-            <TextField v-model="phonenum" hint="Naam" row="4"/>
-            <Button text="Volgende" @tap="$navigateTo(menuComponent)" class="button" row="6"/>
+            <Label :textWrap="true" class="hint" text="Voer je voor- en achternaam in om door te gaan. " row="2"/>
+            <TextField v-model="name" hint="Naam" row="4"/>
+            <Button text="Volgende" @tap="submit()" class="button" row="6"/>
         </GridLayout>
     </Page>
 </template>
@@ -16,15 +16,17 @@
     export default {
         data(){
             return {
-                name: 'Jan Sneeuw',
-                menuComponent: TeamMenu
+                name: 'Jan Sneeuw'
             }
         },
         mounted(){
             
         },
         methods: {
-
+            submit(){
+                this.$userService.setName(name)
+                this.$navigateTo(TeamMenu)
+            }
         }
     }
 </script>

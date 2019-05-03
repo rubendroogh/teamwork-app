@@ -17,7 +17,7 @@ firebase.init({
     
     if (data.loggedIn){
       const userService = new UserService(data.user.uid, firebase)
-      Vue.prototype.$user = userService
+      Vue.prototype.$userService = userService
     }
   }
 }).then(

@@ -41,10 +41,12 @@
                     }
                 }).then(
                     result => {
+                        this.$userService.createUserDoc()
                         this.$navigateTo(RegisterName)
                     },
                     errorMessage => {
                         console.log(`Error: ${errorMessage}`)
+                        this.$userService.createUserDoc()
                         this.$navigateTo(RegisterName)
                     }
                 );

@@ -38,7 +38,6 @@
         },
         methods: {
             getUserData() {
-                console.dir(this.$user.getUid())
             }
         }
     };
