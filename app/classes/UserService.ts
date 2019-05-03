@@ -21,7 +21,9 @@ export default class UserService implements IUser {
         }
 
         // Create document in firestore
-        this.userDoc = this.firebase.firestore.collection('users').doc(this.uid).set(data)
+        let userCollection = this.firebase.firestore.collection('users')
+        userCollection.doc(this.uid).set(data)
+        this.userDoc = userCollection.doc(this.uid)
     }
 
     public getName(){
@@ -39,14 +41,16 @@ export default class UserService implements IUser {
     public setName(name: string){
         this.name = name
 
-
+        this.userDoc.update({
+            name: this.name
+        })
     }
 
-    public setUid(uid: string){
-        this.uid = uid
-    }
+    public addTeam(teamId: string){
+        this.teams.push(`/teams/${teamId}`)
 
-    public setFirebaseRef(firebase: any){
-        this.firebase = firebase
+        this.userDoc.update({
+            teams: this.teams
+        })
     }
 }

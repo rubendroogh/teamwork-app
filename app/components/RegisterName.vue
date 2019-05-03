@@ -24,7 +24,7 @@
         },
         methods: {
             submit(){
-                this.$userService.setName(name)
+                this.$userService.setName(this.name)
                 this.$navigateTo(TeamMenu)
             }
         }
