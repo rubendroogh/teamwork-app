@@ -1,6 +1,6 @@
 <template>
     <Page>
-        <ActionBar title="My Team"/>
+        <CustomActionBar/>
         <GridLayout columns="*,*" rows="*" width="*" height="*" margin="20"
             verticalAlignment="top">
             <StackLayout col="0" >
@@ -16,10 +16,15 @@
 </template>
 
 <script>
+    import CustomActionBar from './elements/CustomActionBar.vue'
+
     import TestIntroduction from './TeamTest/Introduction.vue'
     import CheckIntroduction from './SafetyCheck/Introduction.vue'
 
     export default {
+        components: {
+            CustomActionBar,
+        },
         data() {
             return {
                 teamTestIntroduction: TestIntroduction,
@@ -37,7 +42,6 @@
         text-align: center;
         font-weight: bold;
         border-radius: 10px;
-        box-shadow: 1px 1px 1px #333;
         font-size:16;
     }
 </style>
