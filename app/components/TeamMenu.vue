@@ -14,20 +14,18 @@
         </GridLayout>
         <StackLayout v-else>
             <Label text="Geen team!" />
+            <Button text="get user data" @tap="getUserData()" />
         </StackLayout>
     </Page>
 </template>
 
 <script>
-    import CustomActionBar from './elements/CustomActionBar.vue'
-
     import TestIntroduction from './TeamTest/Introduction.vue'
     import CheckIntroduction from './SafetyCheck/Introduction.vue'
 
+    import UserService from '../classes/UserService'
+
     export default {
-        components: {
-            CustomActionBar,
-        },
         data() {
             return {
                 teamTestIntroduction: TestIntroduction,
@@ -37,6 +35,11 @@
         },
         mounted(){
             // Check if team exists
+        },
+        methods: {
+            getUserData() {
+                console.dir(this.$user.getUid())
+            }
         }
     };
 </script>

@@ -3,17 +3,12 @@ import Login from './components/Login.vue'
 
 import UserService from './classes/UserService'
 
-// import CustomActionBar from './components/elements/CustomActionBar.vue'
-
 /* Custom Elements */
+import CustomActionBar from './components/elements/CustomActionBar.vue'
 
-// Vue.registerElement(
-//   'CustomActionBar',
-//   () => CustomActionBar
-// )
+Vue.component('CustomActionBar', CustomActionBar)
 
 /* Firebase Authentication */
-
 const firebase = require("nativescript-plugin-firebase");
 
 firebase.init({
