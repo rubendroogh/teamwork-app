@@ -11,6 +11,7 @@ export default class UserService implements IUser {
     firebase: any
     userDoc: any
 
+    // TODO: check if user exists(?) if so, load that one
     constructor(uid: string, firebaseRef: any){
         this.uid = uid
         this.firebase = firebaseRef
@@ -19,11 +20,21 @@ export default class UserService implements IUser {
             name: '',
             teams: []
         }
+        
+        this.userDoc = this.firebase.firestore.collection("users").doc(uid);
 
-        // Create document in firestore
-        let userCollection = this.firebase.firestore.collection('users')
-        userCollection.doc(this.uid).set(data)
-        this.userDoc = userCollection.doc(this.uid)
+        this.userDoc.get().then(doc => {
+            if (doc.exists) {
+                // Get data from Firestore
+                this.name = doc.data().name
+                this.teams = doc.data().teams
+            } else {
+                // Create document in Firestore
+                let userCollection = this.firebase.firestore.collection('users')
+                userCollection.doc(this.uid).set(data)
+                this.userDoc = userCollection.doc(this.uid)
+            }
+        })
     }
 
     public getName(){
