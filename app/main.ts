@@ -13,6 +13,7 @@ const firebase = require("nativescript-plugin-firebase");
 
 firebase.init({
   onAuthStateChanged: data => {
+    console.log(data.loggedIn)
     Vue.prototype.$loggedIn = data.loggedIn
     
     if (data.loggedIn){
