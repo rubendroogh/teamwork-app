@@ -13,15 +13,16 @@
             </StackLayout>  
         </GridLayout>
         <StackLayout v-else>
-            <Label text="Geen team!" />
-            <Button text="get user data" @tap="getUserData()" />
+            <Label text="He, je zit nog niet in een team!" />
+            <Button text="Maak team" @tap="$navigateTo(createTeam)" />
         </StackLayout>
     </Page>
 </template>
 
 <script>
-    import TestIntroduction from './TeamTest/Introduction.vue'
-    import CheckIntroduction from './SafetyCheck/Introduction.vue'
+    import TestIntroduction from './teamTest/Introduction.vue'
+    import CheckIntroduction from './safetyCheck/Introduction.vue'
+    import CreateTeam from './teamAdmin/CreateTeam.vue'
 
     import UserService from '../classes/UserService'
 
@@ -30,6 +31,7 @@
             return {
                 teamTestIntroduction: TestIntroduction,
                 safetyCheckIntroduction: CheckIntroduction,
+                createTeam: CreateTeam,
                 hasTeam: false
             };
         },
@@ -37,8 +39,7 @@
             // Check if team exists
         },
         methods: {
-            getUserData() {
-            }
+            
         }
     };
 </script>
