@@ -18,7 +18,7 @@ export default class TeamService{
         this.firebase = firebaseRef
 
         let teamData = {
-            name: options.name ? options.name : '',
+            name: options.name ? options.name : 'A new team',
             members: []
         }
 
