@@ -22,14 +22,12 @@
             }
         },
         mounted(){
-            setTimeout(() => {
-                this.$firebase.getCurrentUser().then(user => {
-                    this.$navigateTo(TeamMenu)
-                }).catch(error => {
-                    console.log(`Error: ${error}`)
-                    this.getTelephoneNumber()
-                })
-            }, 10);
+            this.$firebase.getCurrentUser().then(user => {
+                this.$navigateTo(TeamMenu)
+            }).catch(error => {
+                console.log(`Error: ${error}`)
+                this.getTelephoneNumber()
+            })
         },
         methods: {
             submit(){
