@@ -57,8 +57,9 @@ export default class TeamService{
 
     // TODO: add check for correct UID
     public addMembers(uids: Array<string>) {
-        // Create array of correctly formatted uids
-        let newMembers = uids.map(uid => `/users/${uid}`)
+        // Create array of references to users
+        let usersCollection = this.firebase.firestore.collection('users')
+        let newMembers = uids.map(uid => usersCollection.doc(uid))
 
         // Join members array
         this.members = (this.members) ? this.members.concat(newMembers) : newMembers
