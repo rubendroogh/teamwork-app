@@ -14,6 +14,7 @@ export default class TeamService{
     firebase: any
     teamDoc: any
 
+    // TODO: check if team exists(?) if so, load that one
     constructor(firebaseRef: any, options?: ITeamOptions){
         this.firebase = firebaseRef
 
@@ -58,13 +59,35 @@ export default class TeamService{
     // TODO: add check for correct UID
     public addMembers(uids: Array<string>) {
         // Create array of references to users
-        let usersCollection = this.firebase.firestore.collection('users')
-        let newMembers = uids.map(uid => usersCollection.doc(uid))
+        const usersCollection = this.firebase.firestore.collection('users')
+        const newMembers = uids.map(uid => usersCollection.doc(uid))
+
+        let userTeamDocs = [this.teamDoc]
+
+        // Add team reference to teams field in user doc
+        // Team duplication check should be done on front end
+        newMembers.forEach(memberDoc => {
+            memberDoc.get().then(doc => {
+                if (doc.exists) {
+                    // If user already has team(s), add the team doc to the list
+                    console.dir(doc.data().teams)
+                    if(doc.data().teams) {
+                        doc.data().teams.push(this.teamDoc)
+                        userTeamDocs = doc.data().teams
+                    }
+
+                    // Push data to Firestore
+                    memberDoc.update({
+                        teams: userTeamDocs
+                    })
+                }
+            })
+        })
 
         // Join members array
         this.members = (this.members) ? this.members.concat(newMembers) : newMembers
 
-        // Update data in Firestore
+        // Update data to team in Firestore
         this.teamDoc.update({
             members: this.members
         }).then(() => {
@@ -82,4 +105,6 @@ export default class TeamService{
             return this.members
         })
     }
+
+    // TODO: add function to sync service to database.
 }
