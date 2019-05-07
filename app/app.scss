@@ -9,22 +9,48 @@
 // Global SCSS styling
 // @see https://docs.nativescript.org/ui/styling
 
-.content{
-    padding: 20;
+$title-font: 'Aileron-Bold', sans-serif;
+$font: 'Lato-Regular', sans-serif;
+$base-font-size: 14;
+$title-font-size: 16;
+
+$primary-color: #0099C4;
+$secondary-color: #333;
+$black: #000;
+$white: #fff;
+$gray: #555;
+
+$button-height: 40;
+
+Label, Button{
+    font-family: $font;
 }
 
-.page-title{
-    text-align: center;
-    font-size: 24;
-    font-weight: bold;
+Button{
+    height: $button-height;
+    background-color: $primary-color;
+    color: $white;
+    border-radius: 20;
 }
 
-.page-text{
-    text-align: center;
-    font-size: 15;
-    padding: 10 0;
+.title{
+    font-family: $title-font;
 }
 
-.italic{
-    font-style: italic;
+.container{
+    padding: 0 10 20 10;
 }
+
+.button-full{
+    width: 100%;
+}
+
+.button-half{
+    width: calc(100% - 5);
+}
+
+// PADDING: 10 l 10 r
+// BASE FONT 14 Lato
+// TITLES: 16 Bold - Aileron
+// FULL WITH BUTTONS 100% wt
+// HALF BUTTONS 50% - 5px wt

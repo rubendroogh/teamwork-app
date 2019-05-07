@@ -1,7 +1,7 @@
 <template>
     <ActionBar class="action-bar">
         <StackLayout orientation="horizontal">
-            <Label text="NativeScript" fontSize="24" verticalAlignment="center" />
+            <Label :text="title" class="title" fontSize="20" verticalAlignment="center" />
         </StackLayout>
         <ActionItem @tap="console.log('test')"
             ios.systemIcon="16" ios.position="right"
@@ -11,6 +11,9 @@
 
 <script>
     export default {
+        props: [
+            'title'
+        ],
         data() {
             return {
                
@@ -22,7 +25,7 @@
 <style lang="scss" scoped>
     .action-bar{
         height: 40;
-        background-color: #fbfbfb;
+        background-color: #fdfdfd;
         color: #000;
     }
     .page-name{

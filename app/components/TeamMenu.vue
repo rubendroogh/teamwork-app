@@ -1,8 +1,7 @@
 <template>
     <Page>
-        <CustomActionBar/>
-        <GridLayout v-if="hasTeam" columns="*,*" rows="*" width="*" height="*" margin="20"
-            verticalAlignment="top">
+        <CustomActionBar title="Mijn Team"/>
+        <GridLayout v-if="hasTeam" columns="*,*" rows="*" class="container" verticalAlignment="top">
             <StackLayout col="0" >
                 <Label text="Tests" class="card"
                     backgroundColor="green" height="180" @tap="$navigateTo(teamTestIntroduction)" />
@@ -12,10 +11,10 @@
                     backgroundColor="blue" height="180" @tap="$navigateTo(safetyCheckIntroduction)" />
             </StackLayout>  
         </GridLayout>
-        <StackLayout v-else>
-            <Label text="He, je zit nog niet in een team!" />
-            <Button text="Maak team" @tap="$navigateTo(createTeam)" />
-        </StackLayout>
+        <GridLayout v-else class="container" rows="*, auto, *, auto">
+            <Label row="1" class="empty-message" text="He, je zit nog niet in een team!" />
+            <Button row="3" text="Maak team" @tap="$navigateTo(createTeam)" />
+        </GridLayout>
     </Page>
 </template>
 
@@ -24,19 +23,19 @@
     import CheckIntroduction from './safetyCheck/Introduction.vue'
     import CreateTeam from './teamAdmin/CreateTeam.vue'
 
-    import UserService from '../classes/UserService'
-
     export default {
         data() {
             return {
                 teamTestIntroduction: TestIntroduction,
                 safetyCheckIntroduction: CheckIntroduction,
                 createTeam: CreateTeam,
-                hasTeam: false
+                hasTeam: false,
+                currentTeam: {}
             };
         },
         mounted(){
             // Check if team exists
+            // if(this.$userService.)
         },
         methods: {
             
@@ -53,5 +52,8 @@
         font-weight: bold;
         border-radius: 10px;
         font-size:16;
+    }
+    .empty-message{
+        text-align: center;
     }
 </style>
