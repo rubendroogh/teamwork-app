@@ -7,6 +7,12 @@ interface ITeamOptions {
     members?: Array<string>
 }
 
+interface ITeam {
+    id: string
+    name: string
+    members?: Array<string>
+}
+
 export default class TeamService{
     id: string
     name: string
@@ -14,7 +20,7 @@ export default class TeamService{
     firebase: any
     teamDoc: any
 
-    // TODO: check if team exists(?) if so, load that one
+    // TODO: load existing team
     constructor(firebaseRef: any, options?: ITeamOptions){
         this.firebase = firebaseRef
 
@@ -70,7 +76,6 @@ export default class TeamService{
             memberDoc.get().then(doc => {
                 if (doc.exists) {
                     // If user already has team(s), add the team doc to the list
-                    console.dir(doc.data().teams)
                     if(doc.data().teams) {
                         doc.data().teams.push(this.teamDoc)
                         userTeamDocs = doc.data().teams
