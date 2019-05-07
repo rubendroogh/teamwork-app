@@ -24,7 +24,12 @@
         },
         methods: {
             submit(){
-                this.$userService.setName(this.name)
+                try{
+                    this.$userService.setName(this.name)
+                } catch(e){
+                    console.log(e)
+                }
+                
                 this.$navigateTo(TeamMenu)
             }
         }

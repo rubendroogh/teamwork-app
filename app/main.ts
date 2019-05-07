@@ -15,8 +15,10 @@ firebase.init({
   onAuthStateChanged: data => {
     console.log(data.loggedIn)
     Vue.prototype.$loggedIn = data.loggedIn
+
+    // check of je de uid uberhaupt krijgt
     
-    if (data.loggedIn){
+    if(data.loggedIn) {
       const userService = new UserService(data.user.uid, firebase)
       Vue.prototype.$userService = userService
     }
