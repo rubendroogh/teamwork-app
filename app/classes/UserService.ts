@@ -4,64 +4,87 @@ interface IUser {
     teams: Array<string>
 }
 
-export default class UserService implements IUser {
-    uid: string
-    name: string
-    teams: Array<string>
+export default class UserService {
+    user: IUser
     firebase: any
     userDoc: any
 
-    // TODO: check if user exists(?) if so, load that one
-    constructor(uid: string, firebaseRef: any){
-        this.uid = uid
+    // @TODO: check if user exists(?) if so, load that one
+    /**
+     * @description Create new instance with uid, load team from Firestore or creates new document.
+     * 
+     * @param uid {string}
+     * @param firebaseRef {any}
+     */
+    constructor(uid: string, firebaseRef: any) {
+        this.user.uid = uid
         this.firebase = firebaseRef
 
-        let data = {
+        let emptyData = {
             name: '',
             teams: []
         }
-        
-        this.userDoc = this.firebase.firestore.collection("users").doc(uid);
+
+        this.userDoc = this.firebase.firestore.collection("users").doc(uid)
 
         this.userDoc.get().then(doc => {
             if (doc.exists) {
                 // Get data from Firestore
-                this.name = doc.data().name
-                this.teams = doc.data().teams
+                this.user.name = doc.data().name
+                this.user.teams = doc.data().teams
             } else {
                 // Create document in Firestore
                 let userCollection = this.firebase.firestore.collection('users')
-                userCollection.doc(this.uid).set(data)
-                this.userDoc = userCollection.doc(this.uid)
+                userCollection.doc(this.user.uid).set(emptyData)
+                this.userDoc = userCollection.doc(this.user.uid)
             }
         })
     }
 
-    public getName(){
-        return this.name
+    /**
+     * @returns name {string}
+     */
+    public getName() {
+        return this.user.name
     }
 
-    public getUid(){
-        return this.uid
+    /**
+     * @returns uid {string}
+     */
+    public getUid() {
+        return this.user.uid
     }
 
-    public getTeams(){
-        return this.teams
+    /**
+     * @returns teams {Array<string>}
+     */
+    public getTeams() {
+        return this.user.teams
     }
 
-    public setName(name: string){
-        this.name = name
+    /**
+     * @description Set new name and update in Firestore
+     * 
+     * @param name {string}
+     */
+    public setName(name: string) {
+        this.user.name = name
 
         this.userDoc.update({
-            name: this.name
+            name: this.user.name
         })
     }
 
-    public addTeam(teamId: string){
-        this.teams.push(`/teams/${teamId}`)
+    /**
+     * @description Add team and update in Firestore
+     * 
+     * @param teamId {string}
+     */
+    public addTeam(teamId: string) {
+        this.user.teams.push(`/teams/${teamId}`)
 
         this.userDoc.update({
-            teams: this.teams
+            teams: this.user.teams
         })
     }
 }
