@@ -19,7 +19,11 @@ export default class UserService {
      * @param firebaseRef {any}
      */
     constructor(uid: string, firebaseRef: any) {
-        this.user.uid = uid
+        this.user = {
+            uid: uid,
+            name: '',
+            teams: []
+        }
         this.firebase = firebaseRef
 
         let emptyData = {
