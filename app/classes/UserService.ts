@@ -9,10 +9,12 @@ export default class UserService {
     firebase: any
     userDoc: any
 
-    // @TODO: check if user exists(?) if so, load that one
     /**
-     * @description Create new instance with uid, load team from Firestore or creates new document.
+     * @description Create new instance with uid, load user from Firestore or creates new document.
      * 
+     * @author rubendroogh
+     * 
+     * @this {UserService}
      * @param uid {string}
      * @param firebaseRef {any}
      */
