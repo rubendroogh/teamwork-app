@@ -14,14 +14,17 @@ interface ITeam {
 }
 
 export default class TeamService{
-    id: string
-    name: string
-    members: Array<string>
+    team: ITeam
     firebase: any
     teamDoc: any
 
     // TODO: load existing team
     constructor(firebaseRef: any, options?: ITeamOptions){
+        this.team = {
+            id: '',
+            name: '',
+            members: []
+        }
         this.firebase = firebaseRef
 
         let teamData = {
@@ -32,30 +35,38 @@ export default class TeamService{
         // Create document in firestore
         let teamCollection = this.firebase.firestore.collection('teams')
 
-        teamCollection.add(teamData).then((doc) => {
-            this.teamDoc = teamCollection.doc(doc.id)
+        teamCollection.add(teamData).then(
+            docRef => {
+                console.dir(docRef.get())
+                this.teamDoc = teamCollection.doc(docRef.id)
+                this.team.id = docRef.id
+                
+                docRef.get().then(doc => {
+                    this.team.name = doc.data().name
+                })
 
-            // Done with the function because extra operations have to be made
-            if(options.members) {
-                this.addMembers(options.members)
+                // Done with the function because extra operations have to be made
+                if(options.members) {
+                    this.addMembers(options.members)
+                }
             }
-        })
+        )
     }
 
     public getName(){
-        return this.name
+        return this.team.name
     }
 
     public getMembers(){
-        return this.members
+        return this.team.members
     }
 
     public setName(name: string){
-        this.name = name
+        this.team.name = name
 
         try {
             this.teamDoc.update({
-                name: this.name
+                name: this.team.name
             })
         } catch (e) {
             console.log(e)
@@ -90,24 +101,24 @@ export default class TeamService{
         })
 
         // Join members array
-        this.members = (this.members) ? this.members.concat(newMembers) : newMembers
+        this.team.members = (this.team.members) ? this.team.members.concat(newMembers) : newMembers
 
         // Update data to team in Firestore
         this.teamDoc.update({
-            members: this.members
+            members: this.team.members
         }).then(() => {
-            return this.members
+            return this.team.members
         })
     }
 
     // TODO: add check for correct UID
     public addMember(uid: string){
-        this.members.push(`/users/${uid}`)
+        this.team.members.push(`/users/${uid}`)
 
         this.teamDoc.update({
-            members: this.members
+            members: this.team.members
         }).then(() => {
-            return this.members
+            return this.team.members
         })
     }
 
