@@ -56,7 +56,12 @@ Button{
     font-family: $title-font;
     font-weight: bold;
     color: $white;
-    text-align: center;
+    text-align: center;   
+}
+
+.card-icon{
+    height: 50;
+    margin-top: 10;
 }
 
 .button-full{
