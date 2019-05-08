@@ -1,11 +1,11 @@
 <template>
     <Page>
-        <CustomActionBar />
-        <StackLayout>
-            <Label text="Team aanmaken" />
-            <TextField v-model="teamName" hint="Team naam" />
-            <Button text="Team aanmaken" @tap="createTeam()" />
-        </StackLayout>
+        <CustomActionBar title="Team aanmaken" />
+        <GridLayout class="container" columns="*" rows="*, auto, *, auto *, auto">
+            <TextField v-model="teamName" hint="Team naam" row="1" />
+            <AddMembers v-on:members="updateMembers($event)" row="3" />
+            <Button text="Team aanmaken" @tap="createTeam()" row="5" />
+        </GridLayout>
     </Page>
 </template>
 
@@ -17,7 +17,8 @@
     export default {
         data(){
             return {
-                teamName: ''
+                teamName: '',
+                members: []
             }
         },
         mounted(){
@@ -27,9 +28,12 @@
             createTeam(){
                 let team = new TeamService(this.$firebase, {
                     name: this.teamName,
-                    members: [this.$userService.getUid()]
+                    members: this.members
                 })
                 this.$navigateTo(TeamMenu)
+            },
+            updateMembers(event){
+                this.members = event
             }
         }
     }

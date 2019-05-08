@@ -37,6 +37,9 @@ Button{
 
 .title{
     font-family: $title-font;
+    font-size: $title-font-size;
+    margin: 5;
+    text-align: center;
 }
 
 .container{
@@ -44,6 +47,7 @@ Button{
 }
 
 .card{
+    font-family: $title-font;
     border-radius: 10;
     font-weight: bold;
     padding: 10;

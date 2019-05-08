@@ -6,8 +6,10 @@ import Login from './components/Login.vue'
 import UserService from './classes/UserService'
 
 /* Custom Elements */
+import AddMembers from './components/elements/AddMembers.vue'
 import CustomActionBar from './components/elements/CustomActionBar.vue'
 
+Vue.component('AddMembers', AddMembers)
 Vue.component('CustomActionBar', CustomActionBar)
 
 /* Create empty user service */
