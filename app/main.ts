@@ -27,5 +27,4 @@ firebase.init({}).then(
   
 new Vue({
   render: h => h('frame', [h(Login)])
-}).$start();
-  
+}).$start()

@@ -20,10 +20,12 @@
                 phonenum: '+31636572279'
             }
         },
-        mounted(){
+        created(){
             this.$firebase.getCurrentUser().then(user => {
-                this.$userService.loadWithUid(user.uid)
-                this.$navigateTo(TeamMenu)
+                this.$userService.loadWithUid(user.uid).then(currentUser => {
+                    this.$navigateTo(TeamMenu)
+                })
+                
             }).catch(error => {
                 console.log(`Error: ${error}`)
                 this.getTelephoneNumber()

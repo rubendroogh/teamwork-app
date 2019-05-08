@@ -30,30 +30,33 @@ export default class UserService {
      * @param uid 
      */
     public loadWithUid(uid: string) {
-        this.user = {
-            uid: uid,
-            name: '',
-            teams: []
-        }
-
-        this.userDoc = this.firebase.firestore.collection("users").doc(uid)
-
-        this.userDoc.get().then(doc => {
-            if (doc.exists) {
-                // Get data from Firestore
-                this.user.name = doc.data().name
-                this.user.teams = doc.data().teams
-            } else {
-                // Create document in Firestore
-                let emptyData = {
-                    name: '',
-                    teams: []
-                }
-
-                let userCollection = this.firebase.firestore.collection('users')
-                userCollection.doc(this.user.uid).set(emptyData)
-                this.userDoc = userCollection.doc(this.user.uid)
+        return new Promise((resolve, reject) => {
+            this.user = {
+                uid: uid,
+                name: '',
+                teams: []
             }
+    
+            this.userDoc = this.firebase.firestore.collection("users").doc(uid)
+    
+            this.userDoc.get().then(doc => {
+                if (doc.exists) {
+                    // Get data from Firestore
+                    this.user.name = doc.data().name
+                    this.user.teams = doc.data().teams
+                    resolve(this.user)
+                } else {
+                    // Create document in Firestore
+                    let emptyData = {
+                        name: '',
+                        teams: []
+                    }
+    
+                    let userCollection = this.firebase.firestore.collection('users')
+                    userCollection.doc(this.user.uid).set(emptyData)
+                    this.userDoc = userCollection.doc(this.user.uid)
+                }
+            })
         })
     }
 
