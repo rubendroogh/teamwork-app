@@ -10,7 +10,7 @@ export default class UserService {
     userDoc: any
 
     /**
-     * @description Create new instance with uid, load user from Firestore or creates new document.
+     * @description Create new instance
      * 
      * @author rubendroogh
      * 
@@ -19,14 +19,19 @@ export default class UserService {
      * @param firebaseRef {any}
      */
     constructor(uid: string, firebaseRef: any) {
-        this.user = {
-            uid: uid,
-            name: '',
-            teams: []
-        }
         this.firebase = firebaseRef
 
-        let emptyData = {
+        if (uid !== '') this.loadWithUid(uid)
+    }
+
+    /**
+     * @description Load data with uid, load user from Firestore or creates new document.
+     * 
+     * @param uid 
+     */
+    public loadWithUid(uid: string) {
+        this.user = {
+            uid: uid,
             name: '',
             teams: []
         }
@@ -40,6 +45,11 @@ export default class UserService {
                 this.user.teams = doc.data().teams
             } else {
                 // Create document in Firestore
+                let emptyData = {
+                    name: '',
+                    teams: []
+                }
+
                 let userCollection = this.firebase.firestore.collection('users')
                 userCollection.doc(this.user.uid).set(emptyData)
                 this.userDoc = userCollection.doc(this.user.uid)

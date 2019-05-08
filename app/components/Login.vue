@@ -22,6 +22,7 @@
         },
         mounted(){
             this.$firebase.getCurrentUser().then(user => {
+                this.$userService.loadWithUid(user.uid)
                 this.$navigateTo(TeamMenu)
             }).catch(error => {
                 console.log(`Error: ${error}`)

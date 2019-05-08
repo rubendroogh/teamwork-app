@@ -10,19 +10,13 @@ import CustomActionBar from './components/elements/CustomActionBar.vue'
 
 Vue.component('CustomActionBar', CustomActionBar)
 
+/* Create empty user service */
+Vue.prototype.$userService = new UserService('', firebase)
+
 /* Firebase Authentication */
 Vue.prototype.$firebase = firebase
 
-firebase.init({
-  onAuthStateChanged: data => {
-    Vue.prototype.$loggedIn = data.loggedIn
-    console.log('Auth state changed')
-    
-    if(data.loggedIn) {
-      Vue.prototype.$userService = new UserService(data.user.uid, firebase)
-    }
-  }
-}).then(
+firebase.init({}).then(
   () => {
     console.log('Firebase initialized')
   },
