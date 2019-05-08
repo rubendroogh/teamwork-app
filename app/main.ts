@@ -1,7 +1,7 @@
 const firebase = require("nativescript-plugin-firebase")
 
 import Vue from 'nativescript-vue'
-import Login from './components/Login.vue'
+import Loader from './components/Loader.vue'
 
 import UserService from './classes/UserService'
 
@@ -35,5 +35,5 @@ firebase.init({}).then(
 
 /* Create vue instance to start application */
 new Vue({
-  render: h => h('frame', [h(Login)])
+  render: h => h('frame', [h(Loader)])
 }).$start()

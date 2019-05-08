@@ -1,5 +1,5 @@
 <template>
-    <Page androidStatusBarBackground="#008FEF">
+    <Page>
         <CustomActionBar :title="currentTeam.name ? currentTeam.name : 'Team Menu'"/>
         <GridLayout v-if="hasTeam" columns="*,*" rows="*" class="container" verticalAlignment="top">
             <StackLayout col="0" >
