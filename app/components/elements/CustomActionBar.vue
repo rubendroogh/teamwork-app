@@ -25,8 +25,8 @@
 <style lang="scss" scoped>
     .action-bar{
         height: 40;
-        background-color: #fdfdfd;
-        color: #000;
+        background-color: #008FEF;
+        color: #FDFDFD;
     }
     .page-name{
         text-align: center;

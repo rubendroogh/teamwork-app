@@ -1,16 +1,16 @@
 <template>
-    <Page statusBarStyle="light" androidStatusBarBackground="#FDFDFD">
+    <Page androidStatusBarBackground="#008FEF">
         <CustomActionBar :title="currentTeam.name ? currentTeam.name : 'Team Menu'"/>
         <GridLayout v-if="hasTeam" columns="*,*" rows="*" class="container" verticalAlignment="top">
             <StackLayout col="0" >
                 <Label text="Mijn team" class="card" height="100" @tap="$navigateTo(teamTestIntroduction)" />
                 <Label text="Events" class="card" height="100" @tap="$navigateTo(teamTestIntroduction)" />
-                <Label text="Teamwork handleiding" class="card" height="100" @tap="$navigateTo(teamTestIntroduction)" />
+                <Label text="Team handleiding" class="card" height="100" @tap="$navigateTo(teamTestIntroduction)" />
                 <Label text="Links" class="card" height="100" @tap="$navigateTo(teamTestIntroduction)" />
             </StackLayout>
             <StackLayout col="1">
                 <Label text="Team test" class="card" height="100" @tap="$navigateTo(safetyCheckIntroduction)" />
-                <Label text="Vergaderingen plannen" class="card" height="100" @tap="$navigateTo(safetyCheckIntroduction)" />
+                <Label text="Vergaderingen" class="card" height="100" @tap="$navigateTo(safetyCheckIntroduction)" />
                 <Label text="Safety check" class="card" height="100" @tap="$navigateTo(safetyCheckIntroduction)" />
             </StackLayout>  
         </GridLayout>
