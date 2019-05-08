@@ -1,11 +1,7 @@
 <template>
     <Page>
-        <ActionBar>
-            <StackLayout orientation="horizontal">
-                <Label text="Team Test" class="page-title" verticalAlignment="center" />
-            </StackLayout>
-        </ActionBar>
-        <GridLayout columns="*" rows="*, auto">
+        <CustomActionBar title="Team test" />
+        <GridLayout class="container" columns="*" rows="*, auto">
             <ListView row="0" for="statement in statements">
                 <v-template>
                     <StackLayout class="statement-container">
@@ -170,11 +166,13 @@
 
 <style lang="scss" scoped>
     .score-button{
-        background-color: white;
+        background-color: #008FEF;
+        color: #FDFDFD;
+        margin: 0 5;
     }
     
     .selected{
-        background-color: rgb(158, 154, 219);
+        background-color: #84D258;
     }
 
     .disabled{
@@ -182,7 +180,7 @@
     }
     
     .statement-container{
-        padding: 30 20;
+        padding: 20 10;
         border: none;
 
         Label{
@@ -191,7 +189,7 @@
         }
 
         .statement-button-container{
-            padding-top: 10;
+            padding-top: 20;
         }
     }
 

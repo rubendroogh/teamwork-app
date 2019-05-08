@@ -17,7 +17,7 @@
                 </Gradient>
             </StackLayout>
             <StackLayout col="1">
-                <Gradient direction="to bottom" colors="#F2C94C, #F2994A" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(safetyCheckIntroduction)" >
+                <Gradient direction="to bottom" colors="#F2C94C, #F2994A" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(teamTestIntroduction)" >
                     <Label class="card-title" text="Team test" />
                 </Gradient>
                 <Gradient direction="to bottom" colors="#84D258, #6AA549" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(safetyCheckIntroduction)" >

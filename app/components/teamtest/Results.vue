@@ -1,13 +1,8 @@
 <template>
     <Page>
-        <ActionBar>
-            <StackLayout orientation="horizontal">
-                <Label text="Team Test" class="page-title" verticalAlignment="center" />
-            </StackLayout>
-        </ActionBar>
-        <StackLayout class="content">
+        <CustomActionBar title="Team test" />
+        <StackLayout class="container">
             <StackLayout v-for="(result, index) in results" :key="index" class="results">
-
                 <Label :textWrap="true" class="frustration-name" :text="result.text" />
                 <Label :textWrap="true" v-if="result.score > 7" text="Dit gaat goed zo!" />
                 <Label :textWrap="true" v-if="result.score === 6 || result.score === 7" text="Dit zou potentieel een probleem kunnen vormen! Denk hierom." />
@@ -15,7 +10,6 @@
                     <Label text="Dit kan beter aangepakt worden!" />
                     <Button text="Hoe kan ik hier mee omgaan?" />
                 </StackLayout>
-                
             </StackLayout>
         </StackLayout>
     </Page>

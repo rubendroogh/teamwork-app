@@ -11,6 +11,7 @@
 
 $title-font: 'Aileron-Bold', sans-serif;
 $font: 'Lato-Regular', sans-serif;
+$font-italic: 'Lato-Italic', sans-serif;
 $base-font-size: 14;
 $title-font-size: 16;
 
@@ -26,6 +27,11 @@ $border-radius: 10;
 
 Label, Button{
     font-family: $font;
+}
+
+.italic{
+    font-family: $font-italic;
+    font-style: italic;
 }
 
 Button{
