@@ -1,14 +1,17 @@
 <template>
     <Page statusBarStyle="light" androidStatusBarBackground="#FDFDFD">
-        <CustomActionBar title="Mijn Team"/>
+        <CustomActionBar :title="currentTeam.name ? currentTeam.name : 'Team Menu'"/>
         <GridLayout v-if="hasTeam" columns="*,*" rows="*" class="container" verticalAlignment="top">
             <StackLayout col="0" >
-                <Label text="Tests" class="card"
-                    backgroundColor="green" height="180" @tap="$navigateTo(teamTestIntroduction)" />
+                <Label text="Mijn team" class="card" height="100" @tap="$navigateTo(teamTestIntroduction)" />
+                <Label text="Events" class="card" height="100" @tap="$navigateTo(teamTestIntroduction)" />
+                <Label text="Teamwork handleiding" class="card" height="100" @tap="$navigateTo(teamTestIntroduction)" />
+                <Label text="Links" class="card" height="100" @tap="$navigateTo(teamTestIntroduction)" />
             </StackLayout>
             <StackLayout col="1">
-                <Label text="Safety check" class="card"
-                    backgroundColor="blue" height="180" @tap="$navigateTo(safetyCheckIntroduction)" />
+                <Label text="Team test" class="card" height="100" @tap="$navigateTo(safetyCheckIntroduction)" />
+                <Label text="Vergaderingen plannen" class="card" height="100" @tap="$navigateTo(safetyCheckIntroduction)" />
+                <Label text="Safety check" class="card" height="100" @tap="$navigateTo(safetyCheckIntroduction)" />
             </StackLayout>  
         </GridLayout>
         <GridLayout v-else class="container" rows="*, auto, *, auto">
@@ -30,29 +33,25 @@
                 safetyCheckIntroduction: CheckIntroduction,
                 createTeam: CreateTeam,
                 hasTeam: false,
-                currentTeam: {}
+                currentTeam: {
+                    id: '',
+                    name: ''
+                }
             };
         },
-        mounted(){
+        created(){
             // Check if team exists
-            // if(this.$userService.)
-        },
-        methods: {
-            
+            if(this.$userService.getTeams().length > 0) {
+                this.hasTeam = true
+                this.$userService.getTeams()[0].get().then(doc => {
+                    this.currentTeam = doc.data()
+                })
+            }
         }
     };
 </script>
 
 <style scoped>
-    .card {
-        margin-right: 20px;
-        margin-bottom: 20px;
-        padding-top: 20px;
-        text-align: center;
-        font-weight: bold;
-        border-radius: 10px;
-        font-size:16;
-    }
     .empty-message{
         text-align: center;
     }

@@ -18,9 +18,11 @@ $primary-color: #0099C4;
 $secondary-color: #333;
 $black: #000;
 $white: #fff;
-$gray: #555;
+$gray: #e4e4e4;
 
 $button-height: 40;
+
+$border-radius: 10;
 
 Label, Button{
     font-family: $font;
@@ -38,7 +40,15 @@ Button{
 }
 
 .container{
-    padding: 0 10 20 10;
+    padding: 10 10 20 10;
+}
+
+.card{
+    border-radius: 10;
+    font-weight: bold;
+    padding: 10;
+    margin: 5;
+    background-color: $gray;
 }
 
 .button-full{

@@ -73,7 +73,6 @@ export default class TeamService{
         }
     }
 
-    // TODO: add check for correct UID
     public addMembers(uids: Array<string>) {
         // Create array of references to users
         const usersCollection = this.firebase.firestore.collection('users')
