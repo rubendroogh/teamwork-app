@@ -11,7 +11,7 @@ import CustomActionBar from './components/elements/CustomActionBar.vue'
 Vue.component('CustomActionBar', CustomActionBar)
 
 /* Create empty user service */
-Vue.prototype.$userService = new UserService('', firebase)
+Vue.prototype.$userService = new UserService('', '', firebase)
 
 /* Firebase Authentication */
 Vue.prototype.$firebase = firebase

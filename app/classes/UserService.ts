@@ -1,6 +1,7 @@
 interface IUser {
     uid: string
     name: string
+    number: string
     teams: Array<string>
 }
 
@@ -18,10 +19,10 @@ export default class UserService {
      * @param uid {string}
      * @param firebaseRef {any}
      */
-    constructor(uid: string, firebaseRef: any) {
+    constructor(uid: string, number: string, firebaseRef: any) {
         this.firebase = firebaseRef
 
-        if (uid !== '') this.loadWithUid(uid)
+        if (uid !== '' && number !== '') this.loadWithUid(uid, number)
     }
 
     /**
@@ -29,11 +30,12 @@ export default class UserService {
      * 
      * @param uid 
      */
-    public loadWithUid(uid: string) {
+    public loadWithUid(uid: string, number: string) {
         return new Promise((resolve, reject) => {
             this.user = {
                 uid: uid,
                 name: '',
+                number: number,
                 teams: []
             }
     
@@ -43,18 +45,21 @@ export default class UserService {
                 if (doc.exists) {
                     // Get data from Firestore
                     this.user.name = doc.data().name
+                    this.user.number = doc.data().number
                     this.user.teams = doc.data().teams
                     resolve(this.user)
                 } else {
                     // Create document in Firestore
                     let emptyData = {
                         name: '',
+                        number: number,
                         teams: []
                     }
     
                     let userCollection = this.firebase.firestore.collection('users')
                     userCollection.doc(this.user.uid).set(emptyData)
                     this.userDoc = userCollection.doc(this.user.uid)
+                    resolve(this.user)
                 }
             })
         })
