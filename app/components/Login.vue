@@ -10,7 +10,6 @@
 </template>
 
 <script lang="ts">
-    const firebase = require("nativescript-plugin-firebase")
     import {Telephony} from 'nativescript-telephony'
     import TeamMenu from './TeamMenu.vue'
     import RegisterName from './RegisterName.vue'
@@ -32,7 +31,7 @@
         methods: {
             submit(){
                 this.$firebase.login({
-                    type: firebase.LoginType.PHONE,
+                    type: this.$firebase.LoginType.PHONE,
                     phoneOptions: {
                         phoneNumber: this.phonenum,
                         verificationPrompt: "The received verification code" // default "Verification code"

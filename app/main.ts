@@ -1,3 +1,5 @@
+const firebase = require("nativescript-plugin-firebase")
+
 import Vue from 'nativescript-vue'
 import Login from './components/Login.vue'
 
@@ -9,31 +11,27 @@ import CustomActionBar from './components/elements/CustomActionBar.vue'
 Vue.component('CustomActionBar', CustomActionBar)
 
 /* Firebase Authentication */
-const firebase = require("nativescript-plugin-firebase");
+Vue.prototype.$firebase = firebase
 
 firebase.init({
   onAuthStateChanged: data => {
-    console.log(data.loggedIn)
     Vue.prototype.$loggedIn = data.loggedIn
-
-    // check of je de uid uberhaupt krijgt
+    console.log('Auth state changed')
     
     if(data.loggedIn) {
-      const userService = new UserService(data.user.uid, firebase)
-      Vue.prototype.$userService = userService
+      Vue.prototype.$userService = new UserService(data.user.uid, firebase)
     }
   }
 }).then(
   () => {
-    console.log("firebase.init done")
+    console.log('Firebase initialized')
   },
   error => {
-    console.log(`firebase.init error: ${error}`)
+    console.log(`Firebase error: ${error}`)
   }
-);
-
-Vue.prototype.$firebase = firebase
-
+)
+  
 new Vue({
   render: h => h('frame', [h(Login)])
 }).$start();
+  
