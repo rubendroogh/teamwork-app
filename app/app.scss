@@ -46,13 +46,11 @@ Button{
     padding: 10 10 20 10;
 }
 
-.card{
+.card-title{
     font-family: $title-font;
-    border-radius: 10;
     font-weight: bold;
-    padding: 10;
-    margin: 5;
-    background-color: $gray;
+    color: $white;
+    text-align: center;
 }
 
 .button-full{

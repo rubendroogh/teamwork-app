@@ -3,15 +3,29 @@
         <CustomActionBar :title="currentTeam.name ? currentTeam.name : 'Team Menu'"/>
         <GridLayout v-if="hasTeam" columns="*,*" rows="*" class="container" verticalAlignment="top">
             <StackLayout col="0" >
-                <Label text="Mijn team" class="card" height="100" @tap="$navigateTo(teamTestIntroduction)" />
-                <Label text="Events" class="card" height="100" @tap="$navigateTo(teamTestIntroduction)" />
-                <Label text="Team handleiding" class="card" height="100" @tap="$navigateTo(teamTestIntroduction)" />
-                <Label text="Links" class="card" height="100" @tap="$navigateTo(teamTestIntroduction)" />
+                <Gradient direction="to bottom" colors="#2DA9EE, #328C98" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(teamTestIntroduction)" >
+                    <Label class="card-title" text="Mijn team" />
+                </Gradient>
+                <Gradient direction="to bottom" colors="#E96092, #EC1060" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(teamTestIntroduction)" >
+                    <Label class="card-title" text="Events" />
+                </Gradient>
+                <Gradient direction="to bottom" colors="#9D50BB, #6E48AA" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(teamTestIntroduction)" >
+                    <Label class="card-title" text="Team handleiding" />
+                </Gradient>
+                <Gradient direction="to bottom" colors="#00C6FF, #0072FF" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(teamTestIntroduction)" >
+                    <Label class="card-title" text="Links"/>
+                </Gradient>
             </StackLayout>
             <StackLayout col="1">
-                <Label text="Team test" class="card" height="100" @tap="$navigateTo(safetyCheckIntroduction)" />
-                <Label text="Vergaderingen" class="card" height="100" @tap="$navigateTo(safetyCheckIntroduction)" />
-                <Label text="Safety check" class="card" height="100" @tap="$navigateTo(safetyCheckIntroduction)" />
+                <Gradient direction="to bottom" colors="#F2C94C, #F2994A" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(safetyCheckIntroduction)" >
+                    <Label class="card-title" text="Team test" />
+                </Gradient>
+                <Gradient direction="to bottom" colors="#84D258, #6AA549" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(safetyCheckIntroduction)" >
+                    <Label class="card-title" text="Vergaderingen" />
+                </Gradient>
+                <Gradient direction="to bottom" colors="#FF9068, #FF4B1F" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(safetyCheckIntroduction)" >
+                    <Label class="card-title" text="Safety check" />
+                </Gradient>
             </StackLayout>  
         </GridLayout>
         <GridLayout v-else class="container" rows="*, auto, *, auto">

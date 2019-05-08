@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@vue/devtools": "5.0.0-beta.3",
+    "nativescript-gradient": "^2.0.1",
     "nativescript-plugin-firebase": "^8.0.1",
     "nativescript-socket.io": "^0.9.0",
     "nativescript-telephony": "^1.0.4",
