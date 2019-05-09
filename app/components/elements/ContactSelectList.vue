@@ -1,15 +1,19 @@
 <template>
     <Page>
         <StackLayout class="container" width="600">
-            <Label text="Kies uit contacten" class="title" />
-            <SearchBar hint="Zoek contacten..." v-model="searchTerm" />
-            <ScrollView height="600">
-                <ListView for="contact in filteredContacts" @itemTap="$emit('add:contact', contact)">
+            <Label text="Kies uit contacten" class="title"/>
+            <SearchBar hint="Zoek contacten..." v-model="searchTerm"/>
+            <ScrollView height="200">
+                <ListView for="contact in filteredContacts" @itemTap="addContact">
                     <v-template>
-                        <Label :text="contact.display_name" class="single-contact" />
+                        <GridLayout columns="*, auto" class="single-contact">
+                            <Label :text="contact.display_name" col="0"/>
+                            <Label v-if="contact.selected == true" text="✔" col="1"/>
+                        </GridLayout>
                     </v-template>
                 </ListView>
             </ScrollView>
+            <Button text="Voeg toe" @tap="$modal.close(selectedContacts)"/>
         </StackLayout>
     </Page>
 </template>
@@ -18,18 +22,34 @@
     const Contacts = require("nativescript-contacts-lite")
 
     export default {
-        data(){
-            return{
+        data() {
+            return {
                 searchTerm: '',
-                contacts: []
+                contacts: [],
+                selectedContacts: []
             }
         },
-        mounted(){
+        mounted() {
             let desiredFields = ['display_name','phone']
                 
             Contacts.getContacts(desiredFields).then((result) => {
-                this.contacts = result
+                this.contacts = result.map(result => {
+                    result.selected = false
+                    return result
+                })
             }, (e) => { console.dir(e) })
+        },
+        methods: {
+            addContact(result) {
+                // get index to add value to show it's been selected
+                let contact = result.item
+                if (this.searchTerm === '') {
+                    this.contacts[result.index].selected = true
+                } else {
+                    this.filteredContacts[result.index].selected = true
+                }
+                this.selectedContacts.push(contact)
+            }
         },
         computed: {
             filteredContacts() {
@@ -40,7 +60,6 @@
                         return contact.display_name.toLowerCase().includes(this.searchTerm.toLowerCase())
                     })
                 }
-                
             }
         },
     }

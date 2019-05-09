@@ -1,13 +1,13 @@
 <template>
-    <GridLayout height="400" columns="*, 50, 50" rows="auto, *, auto">
+    <GridLayout height="400" columns="*, 40, 50" rows="auto, *, auto">
         <Label class="title" text="Voeg teamleden toe" colSpan="3" />
         <ListView for="member in members" @itemTap="onItemTap" colSpan="3" row="1">
             <v-template>
                 <Label class="member-list-item" :text="member.name" />
             </v-template>
         </ListView>
-        <TextField v-model="newNumber" hint="Tel. nr" row="2" />
-        <Button class="small-button" text="c" row="2" col="1" @add:contact="addFromContacts($event)" @tap="openContactsList()" />
+        <TextField class="phone-input" v-model="newNumber" hint="Tel. nr" row="2" />
+        <Image class="contacts-button" src="~/assets/images/contacts-icon.png" row="2" col="1" @tap="getContactsList()" />
         <Button class="small-button" text="+" row="2" col="2" @tap="addMember(newNumber)" />
     </GridLayout>
 </template>
@@ -33,14 +33,22 @@
             console.log(this.memberUids)
         },
         methods: {
-            openContactsList() {
-                this.$showModal(ContactSelectList)
+            getContactsList() {
+                this.$showModal(ContactSelectList).then(contacts => {
+                    contacts.forEach(contact => {
+                        this.addFromContacts(contact)
+                    })
+                })
             },
             addFromContacts(contact) {
                 // check of het bestaat of niet
                 // anders icoontje weergeven van uitnodigen
                 console.log('Contact:')
                 console.dir(contact)
+                this.members.push({
+                    uid: '',
+                    name: contact.display_name
+                })
             },
             getUserByNumber(number) {
                 return new Promise((resolve, reject) => {
@@ -67,7 +75,6 @@
             addMember(newNumber) {
                 // Check if user exists
                 // Get UID and name by number if they do
-                
 
                 this.getUserByNumber(newNumber).then( doc => {
                     this.members.push({
@@ -99,5 +106,19 @@
     }
     .small-button{
         margin-left: 10;
+    }
+    .contacts-button{
+        height: 40;
+        border-width: 1;
+        border-color: #A0B4CE;
+        border-style: solid;
+        border-top-right-radius: 20;
+        border-bottom-right-radius: 20;
+        border-left-width: 0;
+    }
+    .phone-input{
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-right-width: 0;
     }
 </style>
