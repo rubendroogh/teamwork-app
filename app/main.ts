@@ -13,9 +13,11 @@ Vue.registerElement(
 
 /* Custom elements */
 import AddMembers from './components/elements/AddMembers.vue'
+import ContactSelectList from './components/elements/ContactSelectList.vue'
 import CustomActionBar from './components/elements/CustomActionBar.vue'
 
 Vue.component('AddMembers', AddMembers)
+Vue.component('ContactSelectList', ContactSelectList)
 Vue.component('CustomActionBar', CustomActionBar)
 
 /* Create empty user service */

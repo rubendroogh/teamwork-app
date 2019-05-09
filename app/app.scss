@@ -17,28 +17,28 @@ $title-font-size: 16;
 
 $primary-color: #0099C4;
 $secondary-color: #333;
-$black: #000;
+$black: #3C4858;
 $white: #fff;
-$gray: #e4e4e4;
+$gray: #A0B4CE;
 
 $button-height: 40;
 
-$border-radius: 10;
+$border-radius: 20;
 
-Label, Button{
+/* General layout */
+.container{
+    padding: 10 10 20 10;
+}
+
+/* General text styling */
+
+Label, Button, TextField{
     font-family: $font;
 }
 
 .italic{
     font-family: $font-italic;
     font-style: italic;
-}
-
-Button{
-    height: $button-height;
-    background-color: $primary-color;
-    color: $white;
-    border-radius: 20;
 }
 
 .title{
@@ -48,10 +48,24 @@ Button{
     text-align: center;
 }
 
-.container{
-    padding: 10 10 20 10;
+/* Button styling */
+
+Button{
+    height: $button-height;
+    background-color: $primary-color;
+    color: $white;
+    border-radius: $border-radius;
 }
 
+.button-full{
+    width: 100%;
+}
+
+.button-half{
+    width: calc(100% - 5);
+}
+
+/* Cards */
 .card-title{
     font-family: $title-font;
     font-weight: bold;
@@ -64,12 +78,13 @@ Button{
     margin-top: 10;
 }
 
-.button-full{
-    width: 100%;
-}
-
-.button-half{
-    width: calc(100% - 5);
+/* Inputs */
+TextField{
+    padding-left: 10;
+    border-width: 1;
+    border-color: $gray;
+    border-style: solid;
+    border-radius: $border-radius;
 }
 
 // PADDING: 10 l 10 r

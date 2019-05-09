@@ -28,7 +28,9 @@ export default class UserService {
     /**
      * @description Load data with uid, load user from Firestore or creates new document.
      * 
-     * @param uid 
+     * @param uid {string}
+     * @param number {string}
+     * @returns Promise<IUser>
      */
     public loadWithUid(uid: string, number: string) {
         return new Promise((resolve, reject) => {
