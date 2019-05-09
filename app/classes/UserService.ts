@@ -2,7 +2,7 @@ interface IUser {
     uid: string
     name: string
     number: string
-    teams: Array<string>
+    teams: Array<any>
 }
 
 export default class UserService {
@@ -104,10 +104,10 @@ export default class UserService {
     /**
      * @description Add team and update in Firestore
      * 
-     * @param teamId {string}
+     * @param teamRef {any}
      */
-    public addTeam(teamId: string) {
-        this.user.teams.push(`/teams/${teamId}`)
+    public addTeam(teamRef: any) {
+        this.user.teams.push(teamRef)
 
         this.userDoc.update({
             teams: this.user.teams
