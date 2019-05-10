@@ -35,9 +35,10 @@
                 </Gradient>
             </StackLayout>  
         </GridLayout>
-        <GridLayout v-else class="container" rows="*, auto, *, auto">
-            <Label row="1" class="empty-message" text="He, je zit nog niet in een team!" />
-            <Button row="3" text="Maak team" @tap="$navigateTo(createTeam)" />
+        <GridLayout v-else class="container" rows="*, auto, auto, *, auto">
+            <Label row="1" text="🏝" class="big-emoji"/>
+            <Label row="2" class="empty-message" text="He, je zit nog niet in een team!" />
+            <Button row="4" text="Maak team" @tap="$navigateTo(createTeam)" />
         </GridLayout>
     </Page>
 </template>
@@ -75,5 +76,10 @@
 <style scoped>
     .empty-message{
         text-align: center;
+    }
+    .big-emoji{
+        text-align: center;
+        font-size: 120;
+        padding: 60 0;
     }
 </style>
