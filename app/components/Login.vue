@@ -1,15 +1,19 @@
 <template>
     <Page :actionBarHidden="true" >
-        <GridLayout columns="*" rows="80, auto, 80, auto, auto, *, auto">
+        <GridLayout columns="*" rows="80, auto, 80, auto, auto, *, auto, auto, auto">
             <Image src="~/assets/images/logo.png" row="1" />
             <Label :textWrap="true" class="hint" text="Voer je telefoonnummer in om een account aan te maken." row="3"/>
             <TextField v-model="phonenum" hint="Enter phone number..." row="4"/>
-            <Button text="Verstuur code" @tap="submit" class="button" row="6"/>
+            <ActivityIndicator busy="true" v-if="isLoading" row="6" color="#E34580" />
+            <Label text="Wachten op code..." class="title" marginBottom="15" marginTop="5" />
+            <Button text="Verstuur code" @tap="submit" class="button" row="8"/>
         </GridLayout>
     </Page>
 </template>
 
 <script lang="ts">
+    const dialogs = require("tns-core-modules/ui/dialogs")
+
     import {Telephony} from 'nativescript-telephony'
     import TeamMenu from './TeamMenu.vue'
     import RegisterName from './RegisterName.vue'
@@ -17,7 +21,8 @@
     export default {
         data(){
             return {
-                phonenum: '+31636572279'
+                phonenum: '+31636572279',
+                isLoading: false
             }
         },
         mounted(){
@@ -25,6 +30,7 @@
         },
         methods: {
             submit(){
+                this.isLoading = true
                 this.$firebase.login({
                     type: this.$firebase.LoginType.PHONE,
                     phoneOptions: {
@@ -33,11 +39,23 @@
                     }
                 }).then(
                     result => {
-                        this.$navigateTo(RegisterName)
+                        this.isLoading = false
+                        this.$userService.loadWithUid(result.uid).then(() => {
+                            this.$navigateTo(RegisterName, {
+                                clearHistory: true,
+                                transitionAndroid: {
+                                    name: "slide"
+                                },
+                            })
+                        })
                     },
                     errorMessage => {
-                        console.log(`Error: ${errorMessage}`)
-                        this.$navigateTo(RegisterName)
+                        this.isLoading = false
+                        dialogs.alert({
+                            title: "Oeps!",
+                            message: `Er is iets mis gegaan met het inloggen: ${errorMessage}`,
+                            okButtonText: "Oké"
+                        })
                     }
                 );
             },

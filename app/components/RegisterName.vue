@@ -30,7 +30,12 @@
                     console.log(e)
                 }
                 
-                this.$navigateTo(TeamMenu)
+                this.$navigateTo(TeamMenu, {
+                    clearHistory: true,
+                    transitionAndroid: {
+                        name: "slide"
+                    },
+                })
             }
         }
     }

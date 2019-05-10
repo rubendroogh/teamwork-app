@@ -56,7 +56,7 @@ export default class TeamService {
                     }
                 }
             )
-        }
+        })
     }
 
     public getId() {
@@ -124,7 +124,6 @@ export default class TeamService {
                 resolve(this.team.members)
             })
         })
-        
     }
 
     // TODO: add check for correct UID
