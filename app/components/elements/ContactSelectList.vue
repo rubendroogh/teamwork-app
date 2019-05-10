@@ -6,7 +6,10 @@
             <ScrollView row="2">
                 <ListView for="contact in filteredContacts" @itemTap="addContact" separatorColor="transparent">
                     <v-template>
-                        <Label :text="contact.display_name" class="single-contact" v-if="!contact.selected"/>
+                        <GridLayout columns="*, *" class="single-contact" v-if="!contact.selected">
+                            <Label :text="contact.display_name" col="0"/>
+                            <Label :text="contact.phone[0].number" col="1" color="#AAA" textAlign="right"/>
+                        </GridLayout>
                     </v-template>
                 </ListView>
             </ScrollView>
@@ -14,7 +17,7 @@
                 <v-template>
                     <GridLayout columns="*, auto" class="single-contact">
                         <Label :text="contact.display_name" col="0"/>
-                        <Label v-if="contact.selected" text="✔" col="1"/>
+                        <Label v-if="contact.selected" text="✔" col="1" paddingRight="10"/>
                     </GridLayout>
                 </v-template>
             </ListView>
@@ -48,6 +51,7 @@
             addContact(result) {
                 // get index to add value to show it's been selected
                 let contact = result.item
+                console.dir(contact)
                 if(!contact.selected) {
                     if(this.searchTerm === '') {
                         this.contacts[result.index].selected = true

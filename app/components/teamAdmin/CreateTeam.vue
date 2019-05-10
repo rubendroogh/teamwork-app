@@ -39,7 +39,12 @@
                         members: this.members
                     }).then(() => {
                         this.$userService.addTeam(team.getReferenceDoc())
-                        this.$navigateTo(TeamMenu)
+                        this.$navigateTo(TeamMenu, {
+                            clearHistory: true,
+                            transitionAndroid: {
+                                name: "slide"
+                            },
+                        })
                     })
                 }
             },

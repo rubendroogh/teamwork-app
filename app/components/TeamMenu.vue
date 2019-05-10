@@ -37,7 +37,7 @@
         </GridLayout>
         <GridLayout v-else class="container" rows="*, auto, auto, *, auto">
             <Label row="1" text="🏝" class="big-emoji"/>
-            <Label row="2" class="empty-message" text="He, je zit nog niet in een team!" />
+            <Label row="2" class="empty-message" text="He, je zit nog niet in een team! Je kan zelf één aanmaken, of wachten tot je uitgenodigd wordt." textWrap="true"/>
             <Button row="4" text="Maak team" @tap="$navigateTo(createTeam)" />
         </GridLayout>
     </Page>
@@ -76,10 +76,11 @@
 <style scoped>
     .empty-message{
         text-align: center;
+        margin: 0 10;
     }
     .big-emoji{
         text-align: center;
         font-size: 120;
-        padding: 60 0;
+        padding: 0 0 60 0;
     }
 </style>
