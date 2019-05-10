@@ -1,19 +1,24 @@
 <template>
     <Page androidStatusBarBackground="#008FEF">
-        <GridLayout class="container" rows="auto, auto, *, auto">
+        <GridLayout class="container" rows="auto, auto, *, auto, auto">
             <Label text="Kies uit contacten" class="title" row="0"/>
             <SearchBar hint="Zoek contacten..." v-model="searchTerm" row="1"/>
             <ScrollView row="2">
-                <ListView for="contact in filteredContacts" @itemTap="addContact">
+                <ListView for="contact in filteredContacts" @itemTap="addContact" separatorColor="transparent">
                     <v-template>
-                        <GridLayout columns="*, auto" class="single-contact">
-                            <Label :text="contact.display_name" col="0"/>
-                            <Label v-if="contact.selected == true" text="✔" col="1"/>
-                        </GridLayout>
+                        <Label :text="contact.display_name" class="single-contact" v-if="!contact.selected"/>
                     </v-template>
                 </ListView>
             </ScrollView>
-            <Button text="Voeg toe" @tap="$modal.close(selectedContacts)" row="3"/>
+            <ListView class="selected-list" height="140" for="contact in selectedContacts" separatorColor="transparent" @itemTap="removeContact" v-if="selectedContacts.length !== 0" row="3">
+                <v-template>
+                    <GridLayout columns="*, auto" class="single-contact">
+                        <Label :text="contact.display_name" col="0"/>
+                        <Label v-if="contact.selected" text="✔" col="1"/>
+                    </GridLayout>
+                </v-template>
+            </ListView>
+            <Button text="Voeg toe" @tap="$modal.close(selectedContacts)" row="4"/>
         </GridLayout>
     </Page>
 </template>
@@ -43,12 +48,14 @@
             addContact(result) {
                 // get index to add value to show it's been selected
                 let contact = result.item
-                if (this.searchTerm === '') {
-                    this.contacts[result.index].selected = true
-                } else {
-                    this.filteredContacts[result.index].selected = true
+                if(!contact.selected) {
+                    if(this.searchTerm === '') {
+                        this.contacts[result.index].selected = true
+                    } else {
+                        this.filteredContacts[result.index].selected = true
+                    }
+                    this.selectedContacts.push(contact)
                 }
-                this.selectedContacts.push(contact)
             }
         },
         computed: {
@@ -67,6 +74,13 @@
 
 <style lang="scss" scoped>
     .single-contact{
+        border-top-width: 1;
+        border-top-color: #F0F0F0;
         padding: 10 0 10 20;
+    }
+    .selected-list{
+        height: 160;
+        border-top-width: 2;
+        padding-top: 10;
     }
 </style>
