@@ -33,11 +33,14 @@
                         okButtonText: "Ok"
                     })
                 } else {
-                    let team = new TeamService(this.$firebase, {
+                    let team = new TeamService(this.$firebase)
+                    team.init({
                         name: this.teamName,
                         members: this.members
+                    }).then(() => {
+                        this.$userService.addTeam(team.getReferenceDoc())
+                        this.$navigateTo(TeamMenu)
                     })
-                    this.$navigateTo(TeamMenu)
                 }
             },
             updateMembers(event){

@@ -81,11 +81,12 @@ Button{
 /* Inputs */
 TextField{
     height: 40;
-    padding-left: 10;
+    padding-left: 15;
     border-width: 1;
     border-color: $gray;
     border-style: solid;
     border-radius: $border-radius;
+    font-size: $base-font-size;
 }
 
 // PADDING: 10 l 10 r
