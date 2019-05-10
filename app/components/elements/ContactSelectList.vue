@@ -1,9 +1,9 @@
 <template>
-    <Page>
-        <StackLayout class="container" width="600">
-            <Label text="Kies uit contacten" class="title"/>
-            <SearchBar hint="Zoek contacten..." v-model="searchTerm"/>
-            <ScrollView height="200">
+    <Page androidStatusBarBackground="#008FEF">
+        <GridLayout class="container" rows="auto, auto, *, auto">
+            <Label text="Kies uit contacten" class="title" row="0"/>
+            <SearchBar hint="Zoek contacten..." v-model="searchTerm" row="1"/>
+            <ScrollView row="2">
                 <ListView for="contact in filteredContacts" @itemTap="addContact">
                     <v-template>
                         <GridLayout columns="*, auto" class="single-contact">
@@ -13,8 +13,8 @@
                     </v-template>
                 </ListView>
             </ScrollView>
-            <Button text="Voeg toe" @tap="$modal.close(selectedContacts)"/>
-        </StackLayout>
+            <Button text="Voeg toe" @tap="$modal.close(selectedContacts)" row="3"/>
+        </GridLayout>
     </Page>
 </template>
 

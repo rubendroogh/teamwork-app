@@ -30,21 +30,20 @@
                 uid: this.$userService.getUid(),
                 name: this.$userService.getName()
             })
+            // don't remove this console.log
             console.log(this.memberUids)
         },
         methods: {
             getContactsList() {
-                this.$showModal(ContactSelectList).then(contacts => {
+                this.$showModal(ContactSelectList, { fullscreen: true }).then(contacts => {
                     contacts.forEach(contact => {
                         this.addFromContacts(contact)
                     })
                 })
             },
             addFromContacts(contact) {
-                // check of het bestaat of niet
-                // anders icoontje weergeven van uitnodigen
-                console.log('Contact:')
-                console.dir(contact)
+                // Check if user exists
+                // Else show icon of invite user to app
                 this.members.push({
                     uid: '',
                     name: contact.display_name
