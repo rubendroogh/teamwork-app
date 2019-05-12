@@ -3,7 +3,10 @@
         <Label class="title" text="Voeg teamleden toe" colSpan="3" />
         <ListView for="member in members" @itemTap="onItemTap" colSpan="3" row="1">
             <v-template>
-                <Label class="member-list-item" :text="member.name" />
+                <GridLayout columns="*, auto">
+                    <Label class="member-list-item" :text="member.name" col="0"/>
+                    <Label class="member-list-item" text="!" col="1" v-if="!member.isUser"/>
+                </GridLayout>
             </v-template>
         </ListView>
         <TextField class="phone-input" v-model="newNumber" hint="Tel. nr" row="2" />
@@ -28,7 +31,8 @@
             // Add current user to list
             this.members.push({
                 uid: this.$userService.getUid(),
-                name: this.$userService.getName()
+                name: this.$userService.getName(),
+                isUser: true
             })
             // don't remove this console.log
             console.log(this.memberUids)
@@ -44,11 +48,27 @@
             addFromContacts(contact) {
                 // Check if user exists
                 // Else show icon of invite user to app
-                this.members.push({
-                    uid: '',
-                    name: contact.display_name
-                })
+                this.getUserByNumber(contact.phone[0].number).then(
+                    uid => {
+                        this.members.push({
+                            uid: uid,
+                            name: contact.display_name,
+                            isUser: true
+                        })
+                    },
+                    error => {
+                        this.members.push({
+                            uid: '',
+                            name: contact.display_name,
+                            isUser: false
+                        })
+                    }
+                )
+                
             },
+            /**
+             * @returns Promise<uid {string}, false>
+             */
             getUserByNumber(number) {
                 return new Promise((resolve, reject) => {
                     const userCollection = this.$firebase.firestore.collection('users')
@@ -64,7 +84,7 @@
                         // TODO: add check for duplication
                         querySnapshot.forEach(doc => {
                             if(doc.exists) {
-                                resolve(doc)
+                                resolve(doc.data().uid)
                             }
                             
                         })

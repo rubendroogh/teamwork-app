@@ -40,7 +40,7 @@
                 }).then(
                     result => {
                         this.isLoading = false
-                        this.$userService.loadWithUid(result.uid).then(() => {
+                        this.$userService.loadWithUid(result.uid, result.phoneNumber).then(() => {
                             this.$navigateTo(RegisterName, {
                                 clearHistory: true,
                                 transitionAndroid: {
