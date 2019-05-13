@@ -34,8 +34,7 @@
                 name: this.$userService.getName(),
                 isUser: true
             })
-            // don't remove this console.log
-            console.log(this.memberUids)
+            this.$emit('members', this.memberUids)
         },
         methods: {
             getContactsList() {
@@ -55,6 +54,7 @@
                             name: contact.display_name,
                             isUser: true
                         })
+                        this.$emit('members', this.memberUids)
                     },
                     error => {
                         this.members.push({
@@ -84,7 +84,7 @@
                         // TODO: add check for duplication
                         querySnapshot.forEach(doc => {
                             if(doc.exists) {
-                                resolve(doc.data().uid)
+                                resolve(doc.id)
                             }
                             
                         })
@@ -94,12 +94,12 @@
             addMember(newNumber) {
                 // Check if user exists
                 // Get UID and name by number if they do
-
                 this.getUserByNumber(newNumber).then( doc => {
                     this.members.push({
                         uid: doc.id,
                         name: doc.data().name
                     })
+                    this.$emit('members', this.memberUids)
                 }, () => {
                     dialogs.alert({
                         title: "Let op!",
@@ -111,9 +111,7 @@
         },
         computed: {
             memberUids: function() {
-                let uids = this.members.map(user => user.uid)
-                this.$emit('members', uids)
-                return uids
+                return this.members.map(user => user.uid)
             }
         }
     }

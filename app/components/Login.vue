@@ -1,7 +1,7 @@
 <template>
     <Page :actionBarHidden="true" >
         <GridLayout columns="*" rows="80, auto, 80, auto, auto, *, auto, auto, auto">
-            <Image src="~/assets/images/logo.png" row="1" />
+            <Image src="~/assets/images/logo.png" marginLeft="30" marginRight="30" row="1" />
             <Label :textWrap="true" class="hint" text="Voer je telefoonnummer in om een account aan te maken of in te loggen." row="3"/>
             <TextField v-model="phonenum" hint="Enter phone number..." row="4"/>
             <ActivityIndicator busy="true" v-if="isLoading" row="6" color="#E34580" />

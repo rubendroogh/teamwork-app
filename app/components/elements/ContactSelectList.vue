@@ -51,7 +51,6 @@
             addContact(result) {
                 // get index to add value to show it's been selected
                 let contact = result.item
-                console.dir(contact)
                 if(!contact.selected) {
                     if(this.searchTerm === '') {
                         this.contacts[result.index].selected = true
