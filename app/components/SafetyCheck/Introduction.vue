@@ -14,7 +14,7 @@
     import SafetyCheckLeader from './SafetyCheckLeader.vue'
 
     export default{
-        data(){
+        data() {
             return {
                 checkComponent: SafetyCheckLeader
             }

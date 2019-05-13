@@ -21,13 +21,13 @@
     import ContactSelectList from './ContactSelectList.vue'
 
     export default {
-        data(){
+        data() {
             return{
                 members: [],
                 newNumber: '',
             }
         },
-        mounted(){
+        mounted() {
             // Add current user to list
             this.members.push({
                 uid: this.$userService.getUid(),

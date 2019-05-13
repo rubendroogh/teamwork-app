@@ -61,7 +61,7 @@
                 }
             };
         },
-        created(){
+        created() {
             // Check if team exists
             if(this.$userService.getTeams().length > 0) {
                 this.hasTeam = true

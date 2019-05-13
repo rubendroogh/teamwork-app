@@ -19,17 +19,17 @@
     import RegisterName from './RegisterName.vue'
 
     export default {
-        data(){
+        data() {
             return {
                 phonenum: '+31636572279',
                 isLoading: false
             }
         },
-        mounted(){
+        mounted() {
             this.getTelephoneNumber()
         },
         methods: {
-            submit(){
+            submit() {
                 this.isLoading = true
                 this.$firebase.login({
                     type: this.$firebase.LoginType.PHONE,
@@ -59,7 +59,7 @@
                     }
                 );
             },
-            getTelephoneNumber(){
+            getTelephoneNumber() {
                 Telephony().then(resolved => {
                     if (resolved.phoneNumber !== "") {
                         this.phoneNumber = resolved.phoneNumber

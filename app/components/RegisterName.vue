@@ -14,16 +14,13 @@
     import TeamMenu from './TeamMenu.vue'
 
     export default {
-        data(){
+        data() {
             return {
                 name: 'Jan Sneeuw'
             }
         },
-        mounted(){
-            
-        },
         methods: {
-            submit(){
+            submit() {
                 try{
                     this.$userService.setName(this.name)
                 } catch(e){

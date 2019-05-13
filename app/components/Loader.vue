@@ -12,7 +12,7 @@
     import Login from './Login.vue'
 
     export default {
-        created(){
+        created() {
             this.$firebase.getCurrentUser().then(user => {
                 this.$userService.loadWithUid(user.uid, user.phoneNumber).then(() => {
                     this.$navigateTo(TeamMenu, {

@@ -18,14 +18,14 @@
     import TeamService from '../../classes/TeamService'
 
     export default {
-        data(){
+        data() {
             return {
                 teamName: '',
                 members: []
             }
         },
         methods: {
-            createTeam(){
+            createTeam() {
                 if(this.teamName === '') {
                     dialogs.alert({
                         title: "Let op!",
@@ -48,7 +48,7 @@
                     })
                 }
             },
-            updateMembers(event){
+            updateMembers(event) {
                 this.members = event
             }
         }
