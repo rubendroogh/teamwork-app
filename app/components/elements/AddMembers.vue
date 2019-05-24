@@ -1,6 +1,6 @@
 <template>
     <GridLayout height="400" columns="*, 40, 50" rows="auto, *, auto">
-        <Label class="title" text="Voeg teamleden toe" colSpan="3" />
+        <Label class="title" text="Jouw teamleden" colSpan="3" />
         <ListView for="member in members" @itemTap="onItemTap" colSpan="3" row="1">
             <v-template>
                 <GridLayout columns="*, auto">

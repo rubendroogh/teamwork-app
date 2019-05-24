@@ -2,7 +2,7 @@
     <Page :actionBarHidden="true" androidStatusBarBackground="#008FEF" >
         <Gradient direction="to bottom" colors="#008FEF, #025D9A" >
             <ActivityIndicator busy="true" margin="auto" marginTop="42%" color="#FDFDFD" />
-            <Label class="title" color="#FDFDFD" marginTop="10" text="Laden..." />
+            <Label class="title text-center" color="#FDFDFD" marginTop="10" text="Laden..." />
         </Gradient>
     </Page>
 </template>

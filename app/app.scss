@@ -9,13 +9,13 @@
 // Global SCSS styling
 // @see https://docs.nativescript.org/ui/styling
 
-$title-font: 'Aileron-Bold', sans-serif;
+$title-font: 'Lato-Bold', sans-serif;
 $font: 'Lato-Regular', sans-serif;
 $font-italic: 'Lato-Italic', sans-serif;
 $base-font-size: 14;
-$title-font-size: 16;
+$title-font-size: 18;
 
-$primary-color: #0099C4;
+$primary-color: #008FEF;
 $secondary-color: #333;
 $black: #3C4858;
 $white: #fff;
@@ -45,7 +45,18 @@ Label, Button, TextField{
     font-family: $title-font;
     font-size: $title-font-size;
     margin: 5;
+    margin-bottom: 15;
+}
+
+.text-center{
     text-align: center;
+}
+
+/* Action Bar */
+.action-bar{
+    height: 40;
+    background-color: $primary-color;
+    color: #FDFDFD;
 }
 
 /* Button styling */

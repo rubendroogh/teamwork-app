@@ -1,5 +1,10 @@
 <template>
-    
+    <Page>
+        <CustomActionBar title="Mijn team"/>
+        <GridLayout>
+            
+        </GridLayout>
+    </Page>
 </template>
 
 <script lang="ts">

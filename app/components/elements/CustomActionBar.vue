@@ -3,8 +3,7 @@
         <StackLayout orientation="horizontal">
             <Label :text="title" class="title" fontSize="20" verticalAlignment="center" />
         </StackLayout>
-        <ActionItem @tap="console.log('test')"
-            ios.systemIcon="16" ios.position="right"
+        <ActionItem ios.systemIcon="16" ios.position="right"
             text="App instellingen" android.position="popup" />
     </ActionBar>
 </template>
@@ -23,11 +22,6 @@
 </script>
 
 <style lang="scss" scoped>
-    .action-bar{
-        height: 40;
-        background-color: #008FEF;
-        color: #FDFDFD;
-    }
     .page-name{
         text-align: center;
         font-size: 22;
