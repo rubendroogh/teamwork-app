@@ -11,7 +11,7 @@
                     <Label class="card-title" text="Events" />
                     <Image src="~/assets/images/events-icon.png" class="card-icon" />
                 </Gradient>
-                <Gradient direction="to bottom" colors="#FF9068, #FF4B1F" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(safetyCheckIntroduction)" >
+                <Gradient direction="to bottom" colors="#FF9068, #FF4B1F" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(safetyCheckMenu)" >
                     <Label class="card-title" text="Safety check" />
                     <Image src="~/assets/images/safety-check-icon.png" class="card-icon" />
                 </Gradient>
@@ -21,7 +21,7 @@
                     <Label class="card-title" text="Team test" />
                     <Image src="~/assets/images/team-test-icon.png" class="card-icon" />
                 </Gradient>
-                <Gradient direction="to bottom" colors="#84D258, #6AA549" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(safetyCheckIntroduction)" >
+                <Gradient direction="to bottom" colors="#84D258, #6AA549" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(safetyCheckMenu)" >
                     <Label class="card-title" text="Vergaderingen" />
                     <Image src="~/assets/images/vergaderingen-icon.png" class="card-icon" />
                 </Gradient>
@@ -37,14 +37,14 @@
 
 <script>
     import TestIntroduction from './teamTest/Introduction.vue'
-    import CheckIntroduction from './safetyCheck/Introduction.vue'
+    import SafetyCheckMenu from './safetyCheck/SafetyCheckMenu.vue'
     import CreateTeam from './teamAdmin/CreateTeam.vue'
 
     export default {
         data() {
             return {
                 teamTestIntroduction: TestIntroduction,
-                safetyCheckIntroduction: CheckIntroduction,
+                safetyCheckMenu: SafetyCheckMenu,
                 createTeam: CreateTeam,
                 hasTeam: false,
                 currentTeam: {
