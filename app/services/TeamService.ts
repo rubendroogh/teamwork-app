@@ -13,6 +13,19 @@ interface ITeam {
     members?: Array<string>
 }
 
+interface ISafetyCheck {
+    id: string
+    results: Array<ISafetyCheckResult>
+    createdAt: string
+}
+
+interface ISafetyCheckResult {
+    userRef: object
+    value: number
+}
+
+
+
 export default class TeamService {
     team: ITeam
     firebase: any

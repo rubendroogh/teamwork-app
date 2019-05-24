@@ -3,7 +3,7 @@ const firebase = require("nativescript-plugin-firebase")
 import Vue from 'nativescript-vue'
 import Loader from './components/Loader.vue'
 
-import UserService from './classes/UserService'
+import UserService from './services/UserService'
 
 /* Plugin elements */
 Vue.registerElement(
