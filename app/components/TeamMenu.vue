@@ -3,21 +3,17 @@
         <CustomActionBar :title="currentTeam.name ? currentTeam.name : 'Team Menu'"/>
         <GridLayout v-if="hasTeam" columns="*,*" rows="*" class="container" verticalAlignment="top">
             <StackLayout col="0" >
-                <Gradient direction="to bottom" colors="#2DA9EE, #328C98" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(teamTestIntroduction)" >
+                <!-- <Gradient direction="to bottom" colors="#2DA9EE, #328C98" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(teamTestIntroduction)" >
                     <Label class="card-title" text="Mijn team" />
                     <Image src="~/assets/images/mijn-team-icon.png" class="card-icon" />
-                </Gradient>
+                </Gradient> -->
                 <Gradient direction="to bottom" colors="#E96092, #EC1060" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(teamTestIntroduction)" >
                     <Label class="card-title" text="Events" />
                     <Image src="~/assets/images/events-icon.png" class="card-icon" />
                 </Gradient>
-                <Gradient direction="to bottom" colors="#9D50BB, #6E48AA" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(teamTestIntroduction)" >
-                    <Label class="card-title" text="Team handleiding" />
-                    <Image src="~/assets/images/team-handleiding-icon.png" class="card-icon" />
-                </Gradient>
-                <Gradient direction="to bottom" colors="#00C6FF, #0072FF" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(teamTestIntroduction)" >
-                    <Label class="card-title" text="Handige links"/>
-                    <Image src="~/assets/images/handige-links-icon.png" class="card-icon" />
+                <Gradient direction="to bottom" colors="#FF9068, #FF4B1F" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(safetyCheckIntroduction)" >
+                    <Label class="card-title" text="Safety check" />
+                    <Image src="~/assets/images/safety-check-icon.png" class="card-icon" />
                 </Gradient>
             </StackLayout>
             <StackLayout col="1">
@@ -28,10 +24,6 @@
                 <Gradient direction="to bottom" colors="#84D258, #6AA549" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(safetyCheckIntroduction)" >
                     <Label class="card-title" text="Vergaderingen" />
                     <Image src="~/assets/images/vergaderingen-icon.png" class="card-icon" />
-                </Gradient>
-                <Gradient direction="to bottom" colors="#FF9068, #FF4B1F" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(safetyCheckIntroduction)" >
-                    <Label class="card-title" text="Safety check" />
-                    <Image src="~/assets/images/safety-check-icon.png" class="card-icon" />
                 </Gradient>
             </StackLayout>  
         </GridLayout>
