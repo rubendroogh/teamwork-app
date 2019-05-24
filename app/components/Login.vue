@@ -29,13 +29,16 @@
             this.getTelephoneNumber()
         },
         methods: {
+            /**
+             * @description Authenticate user with login type of phone.
+             */
             submit() {
                 this.isLoading = true
                 this.$firebase.login({
                     type: this.$firebase.LoginType.PHONE,
                     phoneOptions: {
                         phoneNumber: this.phonenum,
-                        verificationPrompt: "The received verification code" // default "Verification code"
+                        verificationPrompt: "The received verification code"
                     }
                 }).then(
                     result => {
@@ -59,6 +62,9 @@
                     }
                 );
             },
+            /**
+             * @description Get telephone number from device and fill input.
+             */
             getTelephoneNumber() {
                 Telephony().then(resolved => {
                     if (resolved.phoneNumber !== "") {
