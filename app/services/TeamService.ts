@@ -7,24 +7,11 @@ interface ITeamOptions {
     members?: Array<string>
 }
 
-interface ITeam {
+export interface ITeam {
     id: string
     name: string
     members?: Array<string>
 }
-
-interface ISafetyCheck {
-    id: string
-    results: Array<ISafetyCheckResult>
-    createdAt: string
-}
-
-interface ISafetyCheckResult {
-    userRef: object
-    value: number
-}
-
-
 
 export default class TeamService {
     team: ITeam

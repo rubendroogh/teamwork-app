@@ -15,7 +15,7 @@
 
     import TeamMenu from '../TeamMenu.vue'
 
-    import TeamService from '../../classes/TeamService'
+    import TeamService from '../../services/TeamService'
 
     export default {
         data() {
