@@ -22,12 +22,17 @@ $white: #fff;
 $gray: #A0B4CE;
 
 $button-height: 40;
+$card-height: 100;
 
 $border-radius: 20;
 
 /* General layout */
 .container{
     padding: 10 10 20 10;
+}
+
+.container-fluid{
+    padding: 0;
 }
 
 /* General text styling */
@@ -77,6 +82,14 @@ Button{
 }
 
 /* Cards */
+.card{
+    width: 50%;
+    border-radius: $border-radius;
+    height: $card-height;
+    margin: 10;
+    padding: 5;
+}
+
 .card-title{
     font-family: $title-font;
     font-weight: bold;

@@ -13,10 +13,14 @@ Vue.registerElement(
 
 /* Custom elements */
 import AddMembers from './components/elements/AddMembers.vue'
+import Banner from './components/elements/Banner.vue'
+import CardList from './components/elements/CardList.vue'
 import ContactSelectList from './components/elements/ContactSelectList.vue'
 import CustomActionBar from './components/elements/CustomActionBar.vue'
 
 Vue.component('AddMembers', AddMembers)
+Vue.component('Banner', Banner)
+Vue.component('CardList', CardList)
 Vue.component('ContactSelectList', ContactSelectList)
 Vue.component('CustomActionBar', CustomActionBar)
 
