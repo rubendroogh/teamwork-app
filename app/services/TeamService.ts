@@ -59,19 +59,19 @@ export default class TeamService {
         })
     }
 
-    public getId() {
+    public getId(): string {
         return this.team.id
     }
 
-    public getName() {
+    public getName(): string {
         return this.team.name
     }
 
-    public getMembers() {
+    public getMembers(): Array<any> {
         return this.team.members
     }
 
-    public getReferenceDoc() {
+    public getReferenceDoc(): any {
         return this.teamDoc
     }
 

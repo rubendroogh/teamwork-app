@@ -1,3 +1,5 @@
+import { resolve } from 'dns';
+
 interface ISafetyCheck {
     results: Array<ISafetyCheckResult>
     createdAt: number
@@ -22,8 +24,7 @@ export default class SafetyCheckService {
             createdAt: Date.now()
         }
 
-        console.dir(this.safetyCheck)
-        this.addToTeam()
+        // this.addToTeam()
     }
 
     /**
@@ -51,5 +52,24 @@ export default class SafetyCheckService {
      */
     public getByKey(key: number) {
         
+    }
+
+    /**
+     * getAllFromTeam
+     * 
+     * @description get all safety checks from current team
+     * 
+     * @returns Promise<Array<any>>
+     */
+    public getAllFromTeam(): Promise<Array<any>> {
+        return new Promise((resolve, reject) => {
+            this.teamRef.get().then(teamDoc => {
+                if (teamDoc.data().safetyChecks) {
+                    resolve(teamDoc.data().safetyChecks)
+                } else{
+                    reject('No safety checks found')
+                }
+            })
+        })
     }
 }
