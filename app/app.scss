@@ -84,6 +84,15 @@ Button{
     width: calc(100% - 5);
 }
 
+.fab-button {
+    height: 55;
+    width: 55; /// this is required on iOS - Android does not require width
+    margin: 10;
+    background-color: #EE6352;
+    vertical-align: bottom;
+    horizontal-align: right;
+}
+
 /* Cards */
 .card{
     color: $white;
