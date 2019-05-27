@@ -11,6 +11,11 @@ Vue.registerElement(
   () => require("nativescript-gradient").Gradient
 )
 
+Vue.registerElement(
+  'Fab',
+  () => require('nativescript-floatingactionbutton').Fab
+)
+
 /* Custom elements */
 import AddMembers from './components/elements/AddMembers.vue'
 import Banner from './components/elements/Banner.vue'
