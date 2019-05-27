@@ -22,7 +22,7 @@
         methods: {
             submit() {
                 try{
-                    this.$userService.setName(this.name)
+                    this.$currentUserService.setName(this.name)
                 } catch(e){
                     console.log(e)
                 }

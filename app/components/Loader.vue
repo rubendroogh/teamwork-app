@@ -14,7 +14,7 @@
     export default {
         created() {
             this.$firebase.getCurrentUser().then(user => {
-                this.$userService.loadWithUid(user.uid, user.phoneNumber).then(() => {
+                this.$currentUserService.loadWithUid(user.uid, user.phoneNumber).then(() => {
                     this.$navigateTo(TeamMenu, {
                         clearHistory: true,
                         transitionAndroid: {

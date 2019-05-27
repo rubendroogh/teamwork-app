@@ -30,7 +30,7 @@ Vue.component('ContactSelectList', ContactSelectList)
 Vue.component('CustomActionBar', CustomActionBar)
 
 /* Create empty user service */
-Vue.prototype.$userService = new UserService('', '', firebase)
+Vue.prototype.$currentUserService = new UserService('', '', firebase)
 
 /* Firebase initialization */
 Vue.prototype.$firebase = firebase

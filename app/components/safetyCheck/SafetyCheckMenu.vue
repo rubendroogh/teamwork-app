@@ -18,11 +18,11 @@
             }
         },
         mounted() {
-            let safetyCheckService = new SafetyCheckService(this.$firebase, this.$userService.getTeams()[0])
+            let safetyCheckService = new SafetyCheckService(this.$firebase, this.$currentUserService.getTeams()[0])
             safetyCheckService.getAllFromTeam().then(checks => {
                 this.prevSafetyChecks = checks.map(check => {
                     let rCheck = {}
-                    rCheck['title'] = new Date(check.createdAt)
+                    rCheck['title'] = new Date(check.createdAt).toLocaleDateString("nl-NL")
                     return rCheck
                 })
             })

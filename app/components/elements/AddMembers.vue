@@ -30,8 +30,8 @@
         mounted() {
             // Add current user to list
             this.members.push({
-                uid: this.$userService.getUid(),
-                name: this.$userService.getName(),
+                uid: this.$currentUserService.getUid(),
+                name: this.$currentUserService.getName(),
                 isUser: true
             })
             this.$emit('members', this.memberUids)

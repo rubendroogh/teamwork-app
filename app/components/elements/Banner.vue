@@ -28,4 +28,8 @@
     .light{
         color: #fff;
     }
+
+    .dark{
+        color: #333;
+    }
 </style>

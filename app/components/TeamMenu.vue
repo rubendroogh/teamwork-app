@@ -55,9 +55,9 @@
         },
         created() {
             // Check if team exists
-            if(this.$userService.getTeams().length > 0) {
+            if(this.$currentUserService.getTeams().length > 0) {
                 this.hasTeam = true
-                this.$userService.getTeams()[0].get().then(doc => {
+                this.$currentUserService.getTeams()[0].get().then(doc => {
                     this.currentTeam = doc.data()
                 })
             }

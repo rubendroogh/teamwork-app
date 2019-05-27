@@ -38,7 +38,7 @@
                         name: this.teamName,
                         members: this.members
                     }).then(() => {
-                        this.$userService.addTeam(team.getReferenceDoc())
+                        this.$currentUserService.addTeam(team.getReferenceDoc())
                         this.$navigateTo(TeamMenu, {
                             clearHistory: true,
                             transitionAndroid: {
