@@ -1,12 +1,10 @@
 <template>
     <Page>
         <CustomActionBar title="Safety check" />
-        <GridLayout class="container" columns="*" rows="auto, auto, auto, *, auto">
-            <Label row="0" class="page-text" :textWrap="true" text="Met de safety check kan je anoniem controleren of mensen in de groep zich op zijn/haar gemak voelen en zich vrij kunnen uitspreken." />
-            <Label row="1" class="page-text" :textWrap="true" text="Wanneer op “Start check” wordt gedrukt krijgt ieder van de groep en keuze van een tot vijf. Vijf is hierbij helemaal veilig, en een totaal niet. Deze scores zijn volledig anoniem." />
-            <Label row="2" class="page-text" :textWrap="true" text="Wanneer scores als een of twee worden gegeven, is het aan te raden om te kijken of de zaken voor iedereen wel goed verlopen." />
-            <Button row="4" text="Start check" />
-        </GridLayout>
+        <StackLayout class="container-fluid">
+            <Banner mode="light" text="Huidige safety check" image="https://images.pexels.com/photos/53594/blue-clouds-day-fluffy-53594.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
+            <CardList :items="prevSafetyChecks" />
+        </StackLayout>
     </Page>
 </template>
 
@@ -16,18 +14,22 @@
     export default{
         data() {
             return {
-                
+                prevSafetyChecks: []
             }
         },
         mounted() {
-            // new SafetyCheckService(this.$firebase, this.$userService.getTeams()[0])
+            let safetyCheckService = new SafetyCheckService(this.$firebase, this.$userService.getTeams()[0])
+            safetyCheckService.getAllFromTeam().then(checks => {
+                this.prevSafetyChecks = checks.map(check => {
+                    let rCheck = {}
+                    rCheck['title'] = new Date(check.createdAt)
+                    return rCheck
+                })
+            })
         }
     }
 </script>
 
 <style lang="scss" scoped>
-    .page-text{
-        margin: 10;
-        text-align: center;
-    }
+    
 </style>

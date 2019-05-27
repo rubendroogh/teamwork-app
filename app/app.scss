@@ -22,7 +22,10 @@ $white: #fff;
 $gray: #A0B4CE;
 
 $button-height: 40;
+
 $card-height: 100;
+$card-padding: 10;
+$card-margin: 5;
 
 $border-radius: 20;
 
@@ -83,11 +86,12 @@ Button{
 
 /* Cards */
 .card{
-    width: 50%;
+    color: $white;
     border-radius: $border-radius;
     height: $card-height;
-    margin: 10;
-    padding: 5;
+    margin: $card-margin;
+    padding: $card-padding;
+    background-color: $primary-color;
 }
 
 .card-title{
