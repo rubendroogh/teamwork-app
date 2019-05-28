@@ -14,6 +14,7 @@ $font: 'Lato-Regular', sans-serif;
 $font-italic: 'Lato-Italic', sans-serif;
 $base-font-size: 14;
 $title-font-size: 18;
+$sub-font-size: 16;
 
 $primary-color: #008FEF;
 $secondary-color: #333;
@@ -38,29 +39,17 @@ $border-radius: 20;
     padding: 0;
 }
 
-.m-1{
-    margin: 10;
-}
+.m-1{ margin: 10; }
+.m-2{ margin: 15; }
+.m-3{ margin: 20; }
 
-.m-2{
-    margin: 15;
-}
+.mt-1{ margin-top: 10; }
+.mt-2{ margin-top: 15; }
+.mt-3{ margin-top: 20; }
 
-.m-3{
-    margin: 20;
-}
-
-.mb-1{
-    margin-bottom: 10;
-}
-
-.mb-2{
-    margin-bottom: 15;
-}
-
-.mb-3{
-    margin-bottom: 20;
-}
+.mb-1{ margin-bottom: 10; }
+.mb-2{ margin-bottom: 15; }
+.mb-3{ margin-bottom: 20; }
 
 /* General text styling */
 
@@ -78,6 +67,13 @@ Label, Button, TextField{
     font-size: $title-font-size;
     margin: 5;
     margin-bottom: 15;
+}
+
+.subtitle{
+    font-family: $title-font;
+    font-size: $sub-font-size;
+    margin: 5;
+    margin-bottom: 10;
 }
 
 .text-center{
