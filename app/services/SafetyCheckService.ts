@@ -1,7 +1,8 @@
 interface ISafetyCheck {
     results: Array<ISafetyCheckResult>
     createdAt: number,
-    isActive: boolean
+    isActive: boolean,
+    expectedResults: number
 }
 
 interface ISafetyCheckResult {
@@ -21,7 +22,8 @@ export default class SafetyCheckService {
         this.safetyCheck = {
             results: [],
             createdAt: Date.now(),
-            isActive: true
+            isActive: true,
+            expectedResults: 0
         }
     }
 
@@ -30,10 +32,10 @@ export default class SafetyCheckService {
      * 
      * @description adds a new safety check to a team and sets it to active
      */
-    public addToTeam() {
-        let safetyChecks = [this.safetyCheck]
-
+    public addToTeam() {    
         this.teamRef.get().then(doc => {
+            this.safetyCheck.expectedResults = doc.data().members.length
+            let safetyChecks = [this.safetyCheck]
             // If user already has safety checks, add the check to the list and sets all others to non-active
             if(doc.data().safetyChecks) {
                 safetyChecks = doc.data().safetyChecks.map(check => {
@@ -82,7 +84,7 @@ export default class SafetyCheckService {
      * 
      * @returns ISafetyCheck | null
      */
-    public getByKey(key: number): ISafetyCheck {
+    public getByKey(key: number): any {
         
     }
 
