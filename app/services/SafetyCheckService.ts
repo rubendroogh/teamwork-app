@@ -1,8 +1,7 @@
-import { resolve } from 'dns';
-
 interface ISafetyCheck {
     results: Array<ISafetyCheckResult>
-    createdAt: number
+    createdAt: number,
+    isActive: boolean
 }
 
 interface ISafetyCheckResult {
@@ -21,23 +20,28 @@ export default class SafetyCheckService {
         
         this.safetyCheck = {
             results: [],
-            createdAt: Date.now()
+            createdAt: Date.now(),
+            isActive: true
         }
-
-        // this.addToTeam()
     }
 
     /**
-     * saveToDatabase
+     * addToTeam
+     * 
+     * @description adds a new safety check to a team and sets it to active
      */
     public addToTeam() {
         let safetyChecks = [this.safetyCheck]
 
         this.teamRef.get().then(doc => {
-            // If user already has safety checks, add the check to the list
+            // If user already has safety checks, add the check to the list and sets all others to non-active
             if(doc.data().safetyChecks) {
-                doc.data().safetyChecks.push(this.safetyCheck)
-                safetyChecks = doc.data().safetyChecks
+                safetyChecks = doc.data().safetyChecks.map(check => {
+                    let rCheck = check
+                    rCheck.isActive = false
+                    return rCheck
+                })
+                safetyChecks.push(this.safetyCheck)
             }
 
             // Push data to Firestore
@@ -48,9 +52,24 @@ export default class SafetyCheckService {
     }
 
     /**
-     * getByKey
+     * getActive
+     * 
+     * @description returns current active safety check
+     * 
+     * @returns ISafetyCheck
      */
-    public getByKey(key: number) {
+    public getActive(): ISafetyCheck {
+        
+    }
+
+    /**
+     * getByKey
+     * 
+     * @description returns safety check info by array key
+     * 
+     * @returns ISafetyCheck
+     */
+    public getByKey(key: number): ISafetyCheck {
         
     }
 
