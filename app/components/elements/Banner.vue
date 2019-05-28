@@ -20,6 +20,7 @@
         padding-top: 50%;
         vertical-align: center;
         margin: 0;
+        margin-bottom: 0;
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
