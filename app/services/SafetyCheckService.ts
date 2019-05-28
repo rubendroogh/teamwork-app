@@ -54,11 +54,24 @@ export default class SafetyCheckService {
     /**
      * getActive
      * 
-     * @description returns current active safety check
+     * @description promises current active safety check
      * 
-     * @returns ISafetyCheck
+     * @returns Promise<ISafetyCheck>
      */
-    public getActive(): ISafetyCheck {
+    public getActive(): any {
+        return new Promise((resolve, reject) => {
+            this.teamRef.get().then(doc => {
+                let activeCheck = null
+                doc.data().safetyChecks.forEach(check => {
+                    (check.isActive === true) ? activeCheck = check : ''
+                })
+                if(activeCheck != null) {
+                    resolve(activeCheck)
+                } else{
+                    reject('No active safety check found.')
+                }
+            })
+        })
         
     }
 
@@ -67,7 +80,7 @@ export default class SafetyCheckService {
      * 
      * @description returns safety check info by array key
      * 
-     * @returns ISafetyCheck
+     * @returns ISafetyCheck | null
      */
     public getByKey(key: number): ISafetyCheck {
         
