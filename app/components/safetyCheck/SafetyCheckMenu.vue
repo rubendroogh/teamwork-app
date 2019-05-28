@@ -17,7 +17,6 @@
 
 <script lang="ts">
     import SafetyCheckService from '../../services/SafetyCheckService'
-
     import SafetyCheckIntro from './SafetyCheckIntro'
 
     export default{
