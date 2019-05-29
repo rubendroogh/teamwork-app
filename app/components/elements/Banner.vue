@@ -1,11 +1,15 @@
 <template>
-    <Label :text="text" class="title banner" :class="mode" :backgroundImage="`url('${image}')`"/>
+    <StackLayout class="banner" :class="mode" :backgroundImage="`url('${image}')`">
+        <Label :text="title" class="title" marginBottom="0"/>
+        <Label :text="subtitle" class="subtitle" marginTop="0"/>
+    </StackLayout>
 </template>
 
 <script>
     export default {
         props: [
-            'text',
+            'title',
+            'subtitle',
             'image',
             'mode'
         ]
@@ -17,7 +21,6 @@
         height: 150;
         width: 100%;
         padding-left: 10;
-        padding-top: 50%;
         vertical-align: center;
         margin: 0;
         margin-bottom: 0;
