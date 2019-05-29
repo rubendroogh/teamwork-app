@@ -25,7 +25,7 @@
     }
 </script>
 
-<style>
+<style lang="scss" scoped>
     Button{
         height: 50;
     }
