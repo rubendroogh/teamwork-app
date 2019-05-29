@@ -2,8 +2,29 @@
     <Page>
         <CustomActionBar title="Safety check" />
         <StackLayout>
-            <Banner mode="light" text="Huidige safety check" image="https://images.pexels.com/photos/53594/blue-clouds-day-fluffy-53594.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
-            <GridLayout rows="auto, *, auto" class="container">
+            <Banner
+                v-if="activeSafetyCheck"
+                mode="light"
+                title="Huidige safety check"
+                :subtitle="subTitle"
+                image="https://images.pexels.com/photos/302804/pexels-photo-302804.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+            />
+            <Banner
+                v-else
+                mode="light"
+                title="Er is nog geen safety check gestart"
+                image="https://images.pexels.com/photos/302804/pexels-photo-302804.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+            />
+            <StackLayout v-if="prevSafetyChecks.length == 0" class="container" padding="50%">
+                <Label text="Klik op de knop om een safety check te starten" class="subtitle text-center m-3" textWrap="true"/>
+                <fab
+                    @tap="$navigateTo(safetyCheckIntroComponent)"
+                    icon="~/assets/images/add-icon.png"
+                    rippleColor="#f1f1f1"
+                    class="fab-button fab-center"
+                ></fab>
+            </StackLayout>
+            <GridLayout v-if="prevSafetyChecks.length > 0" rows="auto, *, auto" class="container">
                 <Label row="0" text="Uitslagen vorige safety checks" class="subtitle mt-2"/>
                 <CardList row="1" rowSpan="2" :items="prevSafetyChecks" />
                 <fab
@@ -26,17 +47,25 @@
         data() {
             return {
                 prevSafetyChecks: [],
-                safetyCheckIntroComponent: SafetyCheckIntro
+                safetyCheckIntroComponent: SafetyCheckIntro,
+                activeSafetyCheck: null,
+                subTitle: ''
             }
         },
         mounted() {
             let safetyCheckService = new SafetyCheckService(this.$firebase, this.$currentUserService.getTeams()[0])
             safetyCheckService.getAllFromTeam().then(checks => {
-                this.prevSafetyChecks = checks.map(check => {
+                this.prevSafetyChecks = checks.filter(check => {
+                    return (!check.isActive)
+                }).map(check => {
                     let rCheck = {}
                     rCheck['title'] = new Date(check.createdAt).toLocaleDateString("nl-NL")
                     return rCheck
                 })
+            })
+            safetyCheckService.getActive().then(check => {
+                this.subTitle = `${check.results.length} / ${check.expectedResults}`
+                this.activeSafetyCheck = check
             })
         }
     }

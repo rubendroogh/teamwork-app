@@ -60,7 +60,7 @@ export default class SafetyCheckService {
      * 
      * @returns Promise<ISafetyCheck>
      */
-    public getActive(): any {
+    public getActive(): Promise<ISafetyCheck> {
         return new Promise((resolve, reject) => {
             this.teamRef.get().then(doc => {
                 let activeCheck = null
