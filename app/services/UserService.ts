@@ -47,20 +47,15 @@ export default class UserService {
             this.userDoc.get().then(doc => {
                 if (doc.exists) {
                     // Get data from Firestore
-                    this.user.name = doc.data().name
-                    this.user.number = doc.data().number
-                    this.user.teams = doc.data().teams
+                    this.user = doc.data()
                     resolve(this.user)
-                } else {
-                    // Create document in Firestore
-                    let emptyData = {
+                } else {    
+                    let userCollection = this.firebase.firestore.collection('users')
+                    userCollection.doc(this.user.uid).set({
                         name: '',
                         number: number,
                         teams: []
-                    }
-    
-                    let userCollection = this.firebase.firestore.collection('users')
-                    userCollection.doc(this.user.uid).set(emptyData)
+                    })
                     this.userDoc = userCollection.doc(this.user.uid)
                     resolve(this.user)
                 }
