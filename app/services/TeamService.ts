@@ -49,9 +49,7 @@ export default class TeamService {
                 members: []
             }
     
-            // Create document in firestore
             let teamCollection = this.firebase.firestore.collection('teams')
-    
             teamCollection.add(teamData).then(
                 docRef => {
                     this.teamDoc = teamCollection.doc(docRef.id)
@@ -61,7 +59,6 @@ export default class TeamService {
                         this.team.name = doc.data().name
                     })
     
-                    // Done with the function because extra operations have to be made
                     if(options.members) {
                         this.addMembers(options.members).then(() => {
                             resolve()
@@ -117,6 +114,7 @@ export default class TeamService {
 
     /**
      * @description add an array of members to team
+     * @todo add check for valid UID
      * 
      * @param uids {Array<string>}
      * @returns Promise<Array<any>>
@@ -152,25 +150,6 @@ export default class TeamService {
             this.team.members = (this.team.members) ? this.team.members.concat(newMembers) : newMembers
 
             // Update data to team in Firestore
-            this.teamDoc.update({
-                members: this.team.members
-            }).then(() => {
-                resolve(this.team.members)
-            })
-        })
-    }
-
-    // TODO: add check for valid UID
-    /**
-     * @description add single member to team
-     * 
-     * @param uid {string}
-     * @returns Array<any>
-     */
-    public addMember(uid: string): Promise<Array<any>> {
-        return new Promise((resolve, reject) => {
-            this.team.members.push(`/users/${uid}`)
-
             this.teamDoc.update({
                 members: this.team.members
             }).then(() => {
