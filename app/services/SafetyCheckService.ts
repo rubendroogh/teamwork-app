@@ -91,9 +91,9 @@ export default class SafetyCheckService {
      * 
      * @description returns safety check info by array key
      * 
-     * @returns Promise<ISafetyCheck | string>
+     * @returns Promise<ISafetyCheck>
      */
-    public getByKey(key: number): Promise<ISafetyCheck | string> {
+    public getByKey(key: number): Promise<ISafetyCheck> {
         return new Promise((resolve, reject) => {
             this.teamRef.get().then(teamDoc => {
                 if (teamDoc.data().safetyChecks[key]) {
@@ -110,9 +110,9 @@ export default class SafetyCheckService {
      * 
      * @description get all safety checks from current team
      * 
-     * @returns Promise<Array<any> | string>
+     * @returns Promise<Array<any>>
      */
-    public getAllFromTeam(): Promise<Array<any> | string> {
+    public getAllFromTeam(): Promise<Array<any>> {
         return new Promise((resolve, reject) => {
             this.teamRef.get().then(teamDoc => {
                 if (teamDoc.data().safetyChecks) {
