@@ -1,4 +1,7 @@
 import {IUser} from './UserService'
+import {ISafetyCheck} from './SafetyCheckService'
+import {IEvent} from './EventService'
+import {ITestResults} from './TeamTestService'
 
 export interface IMeeting{
     agendaItems: Array<IAgendaItem>
@@ -12,4 +15,5 @@ export interface IMeeting{
 export interface IAgendaItem{
     description: string
     addedBy: IUser
+    reference?: ISafetyCheck | IEvent | ITestResults
 }
