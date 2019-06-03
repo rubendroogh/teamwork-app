@@ -2,15 +2,15 @@
  *    - name (string): set team name
  *    - members (array of strings): set team members
  */
-interface ITeamOptions {
+export interface ITeamOptions {
     name?: string
-    members?: Array<string>
+    members?: Array<any>
 }
 
 export interface ITeam {
     id: string
     name: string
-    members?: Array<string>
+    members?: Array<any>
 }
 
 export default class TeamService {
@@ -19,6 +19,14 @@ export default class TeamService {
     teamDoc: any
 
     // TODO: load existing team
+    /**
+     * @description Create new instance
+     * 
+     * @author rubendroogh
+     * 
+     * @this {TeamService}
+     * @param firebaseRef {any}
+     */
     constructor(firebaseRef: any) {
         this.team = {
             id: '',
@@ -28,6 +36,12 @@ export default class TeamService {
         this.firebase = firebaseRef
     }
 
+    /**
+     * @description creates new team in database using provided options
+     * 
+     * @param options {ITeamOptions}
+     * @returns Promise<null>
+     */
     public init(options: ITeamOptions) {
         return new Promise((resolve, reject) => {
             let teamData = {
@@ -75,6 +89,9 @@ export default class TeamService {
         return this.teamDoc
     }
 
+    /** 
+     * @param name {string}
+     */
     public setName(name: string) {
         this.team.name = name
 
@@ -87,6 +104,12 @@ export default class TeamService {
         }
     }
 
+    /**
+     * @description add an array of members to team
+     * 
+     * @param uids {Array<string>}
+     * @returns Promise<Array<any>>
+     */
     public addMembers(uids: Array<string>) {
         return new Promise((resolve, reject) => {
             // Create array of references to users
@@ -126,7 +149,13 @@ export default class TeamService {
         })
     }
 
-    // TODO: add check for correct UID
+    // TODO: add check for valid UID
+    /**
+     * @description add single member to team
+     * 
+     * @param uid {string}
+     * @returns Array<any>
+     */
     public addMember(uid: string) {
         this.team.members.push(`/users/${uid}`)
 
