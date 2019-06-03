@@ -11,6 +11,7 @@
 
 $title-font: 'Lato-Bold', sans-serif;
 $font: 'Lato-Regular', sans-serif;
+$font-bold: 'Lato-Bold', sans-serif;
 $font-italic: 'Lato-Italic', sans-serif;
 $base-font-size: 14;
 $title-font-size: 18;
@@ -60,6 +61,11 @@ Label, Button, TextField{
     font-family: $font;
 }
 
+.bold{
+    font-family: $font-bold;
+    font-weight: bold;
+}
+
 .italic{
     font-family: $font-italic;
     font-style: italic;
@@ -81,6 +87,14 @@ Label, Button, TextField{
 
 .text-center{
     text-align: center;
+}
+
+.text-right{
+    text-align: right;
+}
+
+.vertical-center{
+    vertical-align: middle;
 }
 
 /* Action Bar */
