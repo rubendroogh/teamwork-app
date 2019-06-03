@@ -1,11 +1,11 @@
-interface ISafetyCheck {
+export interface ISafetyCheck {
     results: Array<ISafetyCheckResult>
     createdAt: number,
     isActive: boolean,
     expectedResults: number
 }
 
-interface ISafetyCheckResult {
+export interface ISafetyCheckResult {
     userRef: any
     value: number
 }

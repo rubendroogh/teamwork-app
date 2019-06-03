@@ -2,7 +2,7 @@
  *    - name (string): set team name
  *    - members (array of strings): set team members
  */
-interface ITeamOptions {
+export interface ITeamOptions {
     name?: string
     members?: Array<string>
 }
