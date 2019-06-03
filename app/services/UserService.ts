@@ -33,7 +33,7 @@ export default class UserService {
      * @param number {string}
      * @returns Promise<IUser>
      */
-    public loadWithUid(uid: string, number: string) {
+    public loadWithUid(uid: string, number: string): Promise<IUser> {
         return new Promise((resolve, reject) => {
             this.user = {
                 uid: uid,
@@ -71,21 +71,21 @@ export default class UserService {
     /**
      * @returns name {string}
      */
-    public getName() {
+    public getName(): string {
         return this.user.name
     }
 
     /**
      * @returns uid {string}
      */
-    public getUid() {
+    public getUid(): string {
         return this.user.uid
     }
 
     /**
      * @returns teams {Array<string>}
      */
-    public getTeams() {
+    public getTeams(): Array<string> {
         return this.user.teams
     }
 
@@ -94,7 +94,7 @@ export default class UserService {
      * 
      * @param name {string}
      */
-    public setName(name: string) {
+    public setName(name: string): void {
         this.user.name = name
 
         this.userDoc.update({
@@ -107,7 +107,7 @@ export default class UserService {
      * 
      * @param teamRef {any}
      */
-    public addTeam(teamRef: any) {
+    public addTeam(teamRef: any): void {
         this.user.teams.push(teamRef)
 
         this.userDoc.update({

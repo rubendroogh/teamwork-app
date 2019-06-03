@@ -41,7 +41,7 @@ export default class SafetyCheckService {
      * 
      * @description adds a new safety check to a team and sets it to active
      */
-    public addToTeam() {    
+    public addToTeam(): void {    
         this.teamRef.get().then(doc => {
             this.safetyCheck.expectedResults = doc.data().members.length
             let safetyChecks = [this.safetyCheck]
@@ -91,9 +91,9 @@ export default class SafetyCheckService {
      * 
      * @description returns safety check info by array key
      * 
-     * @returns Promise<ISafetyCheck> | Promise<string>
+     * @returns Promise<ISafetyCheck | string>
      */
-    public getByKey(key: number): any {
+    public getByKey(key: number): Promise<ISafetyCheck | string> {
         return new Promise((resolve, reject) => {
             this.teamRef.get().then(teamDoc => {
                 if (teamDoc.data().safetyChecks[key]) {
@@ -110,9 +110,9 @@ export default class SafetyCheckService {
      * 
      * @description get all safety checks from current team
      * 
-     * @returns Promise<Array<any>> | Promise<string>
+     * @returns Promise<Array<any> | string>
      */
-    public getAllFromTeam(): Promise<Array<any>> {
+    public getAllFromTeam(): Promise<Array<any> | string> {
         return new Promise((resolve, reject) => {
             this.teamRef.get().then(teamDoc => {
                 if (teamDoc.data().safetyChecks) {

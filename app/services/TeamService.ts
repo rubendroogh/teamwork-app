@@ -40,9 +40,9 @@ export default class TeamService {
      * @description creates new team in database using provided options
      * 
      * @param options {ITeamOptions}
-     * @returns Promise<null>
+     * @returns Promise<void>
      */
-    public init(options: ITeamOptions) {
+    public init(options: ITeamOptions): Promise<void> {
         return new Promise((resolve, reject) => {
             let teamData = {
                 name: options.name ? options.name : 'A new team',
@@ -73,18 +73,30 @@ export default class TeamService {
         })
     }
 
+    /**
+     * @returns string
+     */
     public getId(): string {
         return this.team.id
     }
 
+    /**
+     * @returns string
+     */
     public getName(): string {
         return this.team.name
     }
 
+    /**
+     * @returns Array<any>
+     */
     public getMembers(): Array<any> {
         return this.team.members
     }
 
+    /**
+     * @returns any
+     */
     public getReferenceDoc(): any {
         return this.teamDoc
     }
@@ -92,7 +104,7 @@ export default class TeamService {
     /** 
      * @param name {string}
      */
-    public setName(name: string) {
+    public setName(name: string): void {
         this.team.name = name
 
         try {
@@ -110,7 +122,7 @@ export default class TeamService {
      * @param uids {Array<string>}
      * @returns Promise<Array<any>>
      */
-    public addMembers(uids: Array<string>) {
+    public addMembers(uids: Array<string>): Promise<Array<any>> {
         return new Promise((resolve, reject) => {
             // Create array of references to users
             const usersCollection = this.firebase.firestore.collection('users')
@@ -156,13 +168,15 @@ export default class TeamService {
      * @param uid {string}
      * @returns Array<any>
      */
-    public addMember(uid: string) {
-        this.team.members.push(`/users/${uid}`)
+    public addMember(uid: string): Promise<Array<any>> {
+        return new Promise((resolve, reject) => {
+            this.team.members.push(`/users/${uid}`)
 
-        this.teamDoc.update({
-            members: this.team.members
-        }).then(() => {
-            return this.team.members
+            this.teamDoc.update({
+                members: this.team.members
+            }).then(() => {
+                resolve(this.team.members)
+            })
         })
     }
 
