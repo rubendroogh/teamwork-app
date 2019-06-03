@@ -59,7 +59,10 @@
                     return (!check.isActive)
                 }).map(check => {
                     let rCheck = {}
-                    rCheck['title'] = new Date(check.createdAt).toLocaleDateString("nl-NL")
+                    let date = new Date(check.createdAt)
+                    rCheck['title'] = 'Safety Check'
+                    rCheck['subTitle'] = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
+                    rCheck['extra'] = '5/5'
                     return rCheck
                 })
             })
