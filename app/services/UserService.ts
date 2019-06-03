@@ -83,9 +83,9 @@ export default class UserService {
     }
 
     /**
-     * @returns teams {Array<string>}
+     * @returns teams {Array<any>}
      */
-    public getTeams(): Array<string> {
+    public getTeams(): Array<any> {
         return this.user.teams
     }
 

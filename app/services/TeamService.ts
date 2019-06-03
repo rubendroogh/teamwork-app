@@ -54,7 +54,6 @@ export default class TeamService {
     
             teamCollection.add(teamData).then(
                 docRef => {
-                    console.dir(docRef.get())
                     this.teamDoc = teamCollection.doc(docRef.id)
                     this.team.id = docRef.id
                     
@@ -125,10 +124,10 @@ export default class TeamService {
     public addMembers(uids: Array<string>): Promise<Array<any>> {
         return new Promise((resolve, reject) => {
             // Create array of references to users
-            const usersCollection = this.firebase.firestore.collection('users')
-            const newMembers = uids.map(uid => usersCollection.doc(uid))
+            const usersCollection: any = this.firebase.firestore.collection('users')
+            const newMembers: Array<any> = uids.map(uid => usersCollection.doc(uid))
 
-            let userTeamDocs = [this.teamDoc]
+            let userTeamDocs: Array<any> = [this.teamDoc]
 
             // Add team reference to teams field in user doc
             // Team duplication check should be done on front end

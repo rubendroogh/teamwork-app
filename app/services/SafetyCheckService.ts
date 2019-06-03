@@ -24,7 +24,7 @@ export default class SafetyCheckService {
      * @param firebaseRef {any}
      * @param teamRef {any}
      */
-    constructor(firebaseRef, teamRef) {
+    constructor(firebaseRef: any, teamRef: any) {
         this.teamRef = teamRef
         this.firebase = firebaseRef
         
@@ -44,11 +44,11 @@ export default class SafetyCheckService {
     public addToTeam(): void {    
         this.teamRef.get().then(doc => {
             this.safetyCheck.expectedResults = doc.data().members.length
-            let safetyChecks = [this.safetyCheck]
+            let safetyChecks: Array<any> = [this.safetyCheck]
             // If user already has safety checks, add the check to the list and sets all others to non-active
             if(doc.data().safetyChecks) {
                 safetyChecks = doc.data().safetyChecks.map(check => {
-                    let rCheck = check
+                    let rCheck: ISafetyCheck = check
                     rCheck.isActive = false
                     return rCheck
                 })
@@ -72,7 +72,7 @@ export default class SafetyCheckService {
     public getActive(): Promise<ISafetyCheck> {
         return new Promise((resolve, reject) => {
             this.teamRef.get().then(doc => {
-                let activeCheck = null
+                let activeCheck: null | ISafetyCheck = null
                 doc.data().safetyChecks.forEach(check => {
                     (check.isActive === true) ? activeCheck = check : ''
                 })
