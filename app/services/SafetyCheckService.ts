@@ -82,10 +82,18 @@ export default class SafetyCheckService {
      * 
      * @description returns safety check info by array key
      * 
-     * @returns ISafetyCheck | null
+     * @returns Promise<ISafetyCheck> | Promise<string>
      */
     public getByKey(key: number): any {
-        
+        return new Promise((resolve, reject) => {
+            this.teamRef.get().then(teamDoc => {
+                if (teamDoc.data().safetyChecks[key]) {
+                    resolve(teamDoc.data().safetyChecks[key])
+                } else{
+                    reject('No safety check found at that index')
+                }
+            })
+        })
     }
 
     /**
@@ -93,7 +101,7 @@ export default class SafetyCheckService {
      * 
      * @description get all safety checks from current team
      * 
-     * @returns Promise<Array<any>>
+     * @returns Promise<Array<any>> | Promise<string>
      */
     public getAllFromTeam(): Promise<Array<any>> {
         return new Promise((resolve, reject) => {
