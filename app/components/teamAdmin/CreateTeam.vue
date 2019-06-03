@@ -16,6 +16,7 @@
     import TeamMenu from '../TeamMenu.vue'
 
     import TeamService from '../../services/TeamService'
+    import {ITeamOptions} from '../../services/TeamService'
 
     export default {
         data() {
@@ -34,10 +35,11 @@
                     })
                 } else {
                     let team = new TeamService(this.$firebase)
-                    team.init({
+                    let teamOptions: ITeamOptions = {
                         name: this.teamName,
                         members: this.members
-                    }).then(() => {
+                    }
+                    team.init(teamOptions).then(() => {
                         this.$currentUserService.addTeam(team.getReferenceDoc())
                         this.$navigateTo(TeamMenu, {
                             clearHistory: true,
