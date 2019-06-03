@@ -15,6 +15,15 @@ export default class SafetyCheckService {
     teamRef: any
     firebase: any
     
+    /**
+     * @description Create new instance
+     * 
+     * @author rubendroogh
+     * 
+     * @this {SafetyCheckService}
+     * @param firebaseRef {any}
+     * @param teamRef {any}
+     */
     constructor(firebaseRef, teamRef) {
         this.teamRef = teamRef
         this.firebase = firebaseRef

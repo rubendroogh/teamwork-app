@@ -17,6 +17,7 @@ export default class UserService {
      * 
      * @this {UserService}
      * @param uid {string}
+     * @param number {string}
      * @param firebaseRef {any}
      */
     constructor(uid: string, number: string, firebaseRef: any) {
