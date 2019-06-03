@@ -50,8 +50,8 @@ export default class TeamService {
             }
     
             let teamCollection = this.firebase.firestore.collection('teams')
-            teamCollection.add(teamData).then(
-                docRef => {
+
+            teamCollection.add(teamData).then( docRef => {
                     this.teamDoc = teamCollection.doc(docRef.id)
                     this.team.id = docRef.id
                     
@@ -59,11 +59,7 @@ export default class TeamService {
                         this.team.name = doc.data().name
                     })
     
-                    if(options.members) {
-                        this.addMembers(options.members).then(() => {
-                            resolve()
-                        })
-                    }
+                    if (options.members) this.addMembers(options.members).then(() => { resolve() })
                 }
             )
         })
