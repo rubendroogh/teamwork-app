@@ -62,12 +62,12 @@
                     let date = new Date(check.createdAt)
                     rCheck['title'] = 'Safety Check'
                     rCheck['subTitle'] = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
-                    rCheck['extra'] = '5/5'
+                    rCheck['extra'] = `${check.results.length}/${check.expectedResults}`
                     return rCheck
                 })
             })
             safetyCheckService.getActive().then(check => {
-                this.subTitle = `${check.results.length} / ${check.expectedResults}`
+                this.subTitle = `${check.results.length}/${check.expectedResults} ingevuld`
                 this.activeSafetyCheck = check
             })
         }

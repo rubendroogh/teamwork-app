@@ -5,7 +5,7 @@
             <Label :textWrap="true" class="hint" text="Voer je telefoonnummer in om een account aan te maken of in te loggen." row="3"/>
             <TextField v-model="phonenum" hint="Enter phone number..." row="4"/>
             <ActivityIndicator busy="true" v-if="isLoading" row="6" color="#E34580" />
-            <Label text="Wachten op code..." class="title" marginBottom="15" marginTop="5" v-if="isLoading" row="7"/>
+            <Label text="Wachten op code..." class="title text-center" marginBottom="15" marginTop="5" v-if="isLoading" row="7"/>
             <Button text="Verstuur code" @tap="submit" class="button" row="8"/>
         </GridLayout>
     </Page>
