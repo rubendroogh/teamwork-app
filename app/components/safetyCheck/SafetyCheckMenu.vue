@@ -43,7 +43,7 @@
     import SafetyCheckService from '../../services/SafetyCheckService'
     import SafetyCheckIntro from './SafetyCheckIntro'
 
-    export default{
+    export default {
         data() {
             return {
                 prevSafetyChecks: [],

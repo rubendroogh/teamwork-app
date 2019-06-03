@@ -16,7 +16,7 @@
     import SafetyCheckService from '../../services/SafetyCheckService'  
     import SafetyCheckInput from "./SafetyCheckInput"
 
-    export default{
+    export default {
         methods: {
             startCheck() {
                 let safetyCheckService = new SafetyCheckService(this.$firebase, this.$currentUserService.getTeams()[0])
