@@ -1,6 +1,6 @@
 <template>
     <Page>
-        <CustomActionBar title="Safety check" />
+        <CustomActionBar :title="'Safety check: ' + key" />
         <StackLayout class="container">
             <Label text="Hoe veilig voel jij je?" class="title text-center" />
             <Label textWrap="true" class="text text-center">
@@ -10,18 +10,27 @@
                 </FormattedString>
             </Label>
             <Label text="1 is totaal niet, 5 is totaal wel." class="text text-center mb-3" />
-            <Button text="5" class="m-1"/>
-            <Button text="4" class="m-1"/>
-            <Button text="3" class="m-1"/>
-            <Button text="2" class="m-1"/>
-            <Button text="1" class="m-1"/>
+            <Button text="5" class="m-1" @tap="saveScore(5)"/>
+            <Button text="4" class="m-1" @tap="saveScore(4)"/>
+            <Button text="3" class="m-1" @tap="saveScore(3)"/>
+            <Button text="2" class="m-1" @tap="saveScore(2)"/>
+            <Button text="1" class="m-1" @tap="saveScore(1)"/>
         </StackLayout>
     </Page>
 </template>
 
 <script>
-    export default {
+    import SafetyCheckService from '../../services/SafetyCheckService'
 
+    export default {
+        props: [
+            'key'
+        ],
+        methods: {
+            saveScore(value) {
+
+            }
+        }
     }
 </script>
 

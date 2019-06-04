@@ -7,6 +7,7 @@
                 mode="light"
                 title="Huidige safety check"
                 :subtitle="subTitle"
+                @tap="navigateToSafetyCheck(activeSafetyCheck.key)"
                 image="https://images.pexels.com/photos/302804/pexels-photo-302804.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
             />
             <Banner
@@ -42,6 +43,7 @@
 <script lang="ts">
     import SafetyCheckService from '../../services/SafetyCheckService'
     import SafetyCheckIntro from './SafetyCheckIntro'
+    import SafetyCheckInput from './SafetyCheckInput'
 
     export default {
         data() {
@@ -70,6 +72,15 @@
                 this.subTitle = `${check.results.length}/${check.expectedResults} ingevuld`
                 this.activeSafetyCheck = check
             })
+        },
+        methods: {
+            navigateToSafetyCheck(key) {
+                this.$navigateTo(SafetyCheckInput, {
+                    props: {
+                        key: key,
+                    }
+                })
+            }
         }
     }
 </script>

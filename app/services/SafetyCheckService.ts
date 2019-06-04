@@ -1,8 +1,9 @@
 export interface ISafetyCheck {
     results: Array<ISafetyCheckResult>
-    createdAt: number,
-    isActive: boolean,
+    createdAt: number
+    isActive: boolean
     expectedResults: number
+    key?: number
 }
 
 export interface ISafetyCheckResult {
@@ -73,8 +74,11 @@ export default class SafetyCheckService {
         return new Promise((resolve, reject) => {
             this.teamRef.get().then(doc => {
                 let activeCheck: null | ISafetyCheck = null
-                doc.data().safetyChecks.forEach(check => {
-                    (check.isActive === true) ? activeCheck = check : ''
+                doc.data().safetyChecks.forEach((check, index) => {
+                    if (check.isActive === true) {
+                        activeCheck = check
+                        activeCheck.key = index
+                    }
                 })
                 if(activeCheck != null) {
                     resolve(activeCheck)
@@ -95,12 +99,14 @@ export default class SafetyCheckService {
      */
     public getByKey(key: number): Promise<ISafetyCheck> {
         return new Promise((resolve, reject) => {
-            this.teamRef.get().then(teamDoc => {
-                if (teamDoc.data().safetyChecks[key]) {
-                    resolve(teamDoc.data().safetyChecks[key])
+            this.getAllFromTeam().then(checks => {
+                if (checks[key]) {
+                    resolve(checks[key])
                 } else{
                     reject('No safety check found at that index')
                 }
+            }, error => {
+                reject('No safety check found at that index')
             })
         })
     }
@@ -122,5 +128,12 @@ export default class SafetyCheckService {
                 }
             })
         })
+    }
+
+    /**
+     * addResult
+     */
+    public addResult(result: ISafetyCheckResult) {
+        
     }
 }
