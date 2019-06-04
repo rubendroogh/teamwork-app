@@ -14,9 +14,9 @@ export interface ITeam {
 }
 
 export default class TeamService {
-    team: ITeam
-    firebase: any
-    teamDoc: any
+    private team: ITeam
+    private firebase: any
+    private teamDoc: any
 
     // TODO: load existing team
     /**

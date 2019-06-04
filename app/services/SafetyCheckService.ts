@@ -12,9 +12,9 @@ export interface ISafetyCheckResult {
 }
 
 export default class SafetyCheckService {
-    safetyCheck: ISafetyCheck
-    teamRef: any
-    firebase: any
+    private safetyCheck: ISafetyCheck
+    private teamRef: any
+    private firebase: any
     
     /**
      * @description Create new instance

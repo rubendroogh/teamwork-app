@@ -6,9 +6,9 @@ export interface IUser {
 }
 
 export default class UserService {
-    user: IUser
-    firebase: any
-    userDoc: any
+    private user: IUser
+    private firebase: any
+    private userDoc: any
 
     /**
      * @description Create new instance
