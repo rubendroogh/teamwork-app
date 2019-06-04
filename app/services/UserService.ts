@@ -85,6 +85,13 @@ export default class UserService {
     }
 
     /**
+     * @returns userRef {any}
+     */
+    public getUserDoc(): any {
+        return this.userDoc
+    }
+
+    /**
      * @description Set new name and update in Firestore
      * 
      * @param name {string}

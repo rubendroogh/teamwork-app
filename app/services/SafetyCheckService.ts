@@ -100,11 +100,7 @@ export default class SafetyCheckService {
     public getByKey(key: number): Promise<ISafetyCheck> {
         return new Promise((resolve, reject) => {
             this.getAllFromTeam().then(checks => {
-                if (checks[key]) {
-                    resolve(checks[key])
-                } else{
-                    reject('No safety check found at that index')
-                }
+                (checks[key]) ? resolve(checks[key]) :  reject('No safety check found at that index')
             }, error => {
                 reject('No safety check found at that index')
             })
@@ -132,8 +128,33 @@ export default class SafetyCheckService {
 
     /**
      * addResult
+     * 
+     * @description add result to safety check
+     * 
+     * @param newResult {ISafetyCheckResult}
+     * @param key {number}
+     * @returns message Promise<string>
      */
-    public addResult(result: ISafetyCheckResult) {
-        
+    public addResult(newResult: ISafetyCheckResult, key: number): Promise<string> {
+        return new Promise((resolve, reject) => {
+            this.teamRef.get().then(teamDoc => {
+                if (teamDoc.data().safetyChecks[key]) {
+                    let safetyChecks: Array<ISafetyCheck> = teamDoc.data().safetyChecks
+                    let userHasResult: boolean = false
+    
+                    safetyChecks[key].results.forEach(result => {
+                        (result.userRef === newResult.userRef) ? userHasResult = true : ''
+                    })
+    
+                    if (!userHasResult) {
+                        safetyChecks[key].results.push(newResult)
+                        this.teamRef.update({
+                            safetyChecks: safetyChecks
+                        })
+                        resolve('Bedankt! Het resultaat is ontvangen.')
+                    }
+                }
+            })
+        })
     }
 }
