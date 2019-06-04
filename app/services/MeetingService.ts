@@ -14,6 +14,6 @@ export interface IMeeting{
 
 export interface IAgendaItem{
     description: string
-    addedBy: IUser
+    addedBy: any //user ref
     reference?: ISafetyCheck | IEvent | ITestResults
 }
