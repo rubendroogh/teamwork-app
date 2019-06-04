@@ -121,6 +121,11 @@ Button{
     width: calc(100% - 5);
 }
 
+.button-rounded{
+    width: $button-height;
+    border-radius: 50%;
+}
+
 .fab-button {
     height: 50;
     width: 50; /// this is required on iOS - Android does not require width
