@@ -20,7 +20,7 @@
 </template>
 
 <script>
-    import TeamMenu from '../TeamMenu'
+    import SafetyCheckMenu from '../SafetyCheckMenu'
     import SafetyCheckService from '../../services/SafetyCheckService'
 
     export default {
@@ -35,7 +35,7 @@
                 }
                 let safetyCheckService = new SafetyCheckService(this.$firebase, this.$currentUserService.getTeams()[0])
                 safetyCheckService.addResult(result, this.key).then(message => {
-                    this.$navigateTo(TeamMenu)
+                    this.$navigateTo(SafetyCheckMenu)
                 })
             }
         }
