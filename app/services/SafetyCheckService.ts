@@ -38,27 +38,31 @@ export default class SafetyCheckService {
     }
 
     /**
-     * addToTeam
+     * addNewToTeam
      * 
      * @description adds a new safety check to a team and sets it to active
+     * @returns Promise<ISafetyCheck>
      */
-    public addToTeam(): void {    
-        this.teamRef.get().then(doc => {
-            this.safetyCheck.expectedResults = doc.data().members.length
-            let safetyChecks: Array<any> = [this.safetyCheck]
-            // If user already has safety checks, add the check to the list and sets all others to non-active
-            if(doc.data().safetyChecks) {
-                safetyChecks = doc.data().safetyChecks.map(check => {
-                    let rCheck: ISafetyCheck = check
-                    rCheck.isActive = false
-                    return rCheck
+    public addNewToTeam(): Promise<ISafetyCheck> {
+        return new Promise((resolve, reject) => {
+            this.teamRef.get().then(doc => {
+                this.safetyCheck.expectedResults = doc.data().members.length
+                let safetyChecks: Array<any> = [this.safetyCheck]
+                // If user already has safety checks, add the check to the list and sets all others to non-active
+                if(doc.data().safetyChecks) {
+                    safetyChecks = doc.data().safetyChecks.map(check => {
+                        let rCheck: ISafetyCheck = check
+                        rCheck.isActive = false
+                        return rCheck
+                    })
+                    safetyChecks.push(this.safetyCheck)
+                }
+    
+                // Push data to Firestore
+                this.teamRef.update({
+                    safetyChecks: safetyChecks
                 })
-                safetyChecks.push(this.safetyCheck)
-            }
-
-            // Push data to Firestore
-            this.teamRef.update({
-                safetyChecks: safetyChecks
+                resolve(this.safetyCheck)
             })
         })
     }
@@ -135,19 +139,25 @@ export default class SafetyCheckService {
      * @param key {number}
      * @returns message Promise<string>
      */
-    public addResult(newResult: ISafetyCheckResult, key: number): Promise<string> {
+    public addResult(newResult: ISafetyCheckResult, timestamp: number): Promise<string> {
         return new Promise((resolve, reject) => {
             this.teamRef.get().then(teamDoc => {
-                if (teamDoc.data().safetyChecks[key]) {
+                // Get index and data of needed safety check
+                let safetyCheckIndex = teamDoc.data().safetyChecks.findIndex(check => { return check.createdAt == timestamp })
+                let safetyCheck = teamDoc.data().safetyChecks.find(check => { return check.createdAt == timestamp })
+
+                if (safetyCheck) {
                     let safetyChecks: Array<ISafetyCheck> = teamDoc.data().safetyChecks
                     let userHasResult: boolean = false
     
-                    safetyChecks[key].results.forEach(result => {
+                    // Check if user already posted a result to this check
+                    safetyChecks[safetyCheckIndex].results.forEach(result => {
                         (result.userRef === newResult.userRef) ? userHasResult = true : ''
                     })
     
                     if (!userHasResult) {
-                        safetyChecks[key].results.push(newResult)
+                        // Add result to array and save to database
+                        safetyChecks[safetyCheckIndex].results.push(newResult)
                         this.teamRef.update({
                             safetyChecks: safetyChecks
                         })

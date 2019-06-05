@@ -20,8 +20,13 @@
         methods: {
             startCheck() {
                 let safetyCheckService = new SafetyCheckService(this.$firebase, this.$currentUserService.getTeams()[0])
-                safetyCheckService.addToTeam()
-                this.$navigateTo(SafetyCheckInput)
+                safetyCheckService.addNewToTeam().then(check => {
+                    this.$navigateTo(SafetyCheckInput, {
+                        props: {
+                            timestamp: check.createdAt,
+                        }
+                    })
+                })
             }
         },
     }

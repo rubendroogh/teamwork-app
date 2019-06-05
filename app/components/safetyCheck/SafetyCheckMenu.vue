@@ -7,7 +7,7 @@
                 mode="light"
                 title="Huidige safety check"
                 :subtitle="subTitle"
-                @tap="navigateToSafetyCheck(activeSafetyCheck.key)"
+                @tap="navigateToSafetyCheck(activeSafetyCheck.createdAt)"
                 :hasButton="true"
                 image="https://images.pexels.com/photos/302804/pexels-photo-302804.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
             />
@@ -76,10 +76,10 @@
             })
         },
         methods: {
-            navigateToSafetyCheck(key) {
+            navigateToSafetyCheck(timestamp) {
                 this.$navigateTo(SafetyCheckInput, {
                     props: {
-                        key: key,
+                        timestamp: timestamp,
                     }
                 })
             }

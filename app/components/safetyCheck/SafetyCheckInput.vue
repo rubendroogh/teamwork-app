@@ -1,6 +1,6 @@
 <template>
     <Page>
-        <CustomActionBar :title="'Safety check: ' + key" />
+        <CustomActionBar title="Safety check" />
         <StackLayout class="container">
             <Label text="Hoe veilig voel jij je?" class="title text-center" />
             <Label textWrap="true" class="text text-center">
@@ -25,7 +25,7 @@
 
     export default {
         props: [
-            'key'
+            'timestamp'
         ],
         methods: {
             saveScore(value) {
@@ -34,7 +34,7 @@
                     value: value
                 }
                 let safetyCheckService = new SafetyCheckService(this.$firebase, this.$currentUserService.getTeams()[0])
-                safetyCheckService.addResult(result, this.key).then(message => {
+                safetyCheckService.addResult(result, this.timestamp).then(message => {
                     this.$navigateTo(SafetyCheckMenu)
                 })
             }
