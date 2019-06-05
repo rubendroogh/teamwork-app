@@ -35,7 +35,7 @@
                 }
                 let safetyCheckService = new SafetyCheckService(this.$firebase, this.$currentUserService.getTeams()[0])
                 safetyCheckService.addResult(result, this.timestamp).then(message => {
-                    this.$navigateTo(SafetyCheckMenu)
+                    this.$navigateTo(SafetyCheckMenu, {clearHistory: true})
                 })
             }
         }

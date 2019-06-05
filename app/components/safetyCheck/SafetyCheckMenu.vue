@@ -70,6 +70,7 @@
                     return rCheck
                 }).reverse()
             })
+            
             safetyCheckService.getActive().then(check => {
                 this.subTitle = `${check.results.length}/${check.expectedResults} ingevuld`
                 this.activeSafetyCheck = check
