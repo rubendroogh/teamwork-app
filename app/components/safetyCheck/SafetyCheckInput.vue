@@ -20,7 +20,7 @@
 </template>
 
 <script>
-    import SafetyCheckMenu from '../SafetyCheckMenu'
+    import SafetyCheckMenu from './SafetyCheckMenu'
     import SafetyCheckService from '../../services/SafetyCheckService'
 
     export default {

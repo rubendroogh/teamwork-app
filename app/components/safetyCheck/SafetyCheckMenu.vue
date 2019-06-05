@@ -8,6 +8,7 @@
                 title="Huidige safety check"
                 :subtitle="subTitle"
                 @tap="navigateToSafetyCheck(activeSafetyCheck.key)"
+                :hasButton="true"
                 image="https://images.pexels.com/photos/302804/pexels-photo-302804.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
             />
             <Banner
@@ -57,6 +58,7 @@
         mounted() {
             let safetyCheckService = new SafetyCheckService(this.$firebase, this.$currentUserService.getTeams()[0])
             safetyCheckService.getAllFromTeam().then(checks => {
+                // Filter the active check, format to usable array and reverse.
                 this.prevSafetyChecks = checks.filter(check => {
                     return (!check.isActive)
                 }).map(check => {
@@ -66,8 +68,7 @@
                     rCheck['subTitle'] = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
                     rCheck['extra'] = `${check.results.length}/${check.expectedResults}`
                     return rCheck
-                })
-                this.prevSafetyCheck.reverse()
+                }).reverse()
             })
             safetyCheckService.getActive().then(check => {
                 this.subTitle = `${check.results.length}/${check.expectedResults} ingevuld`

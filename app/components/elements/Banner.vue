@@ -2,7 +2,7 @@
     <GridLayout rows="*, auto, auto, *" columns="auto, *" class="banner" :class="mode" :backgroundImage="`url('${image}')`">
         <Label row="1" :text="title" class="title" marginBottom="0"/>
         <Label row="2" :text="subtitle" class="subtitle" marginTop="0"/>
-        <Button row="1" rowSpan="2" col="1" text=">" class="button-rounded" @tap="$emit('tap')"/>
+        <Button row="1" rowSpan="2" col="1" text=">" v-if="hasButton" class="button-rounded" @tap="$emit('tap')"/>
     </GridLayout>
 </template>
 
@@ -12,7 +12,8 @@
             'title',
             'subtitle',
             'image',
-            'mode'
+            'mode',
+            'hasButton'
         ]
     }
 </script>
