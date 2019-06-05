@@ -67,6 +67,7 @@
                     rCheck['extra'] = `${check.results.length}/${check.expectedResults}`
                     return rCheck
                 })
+                this.prevSafetyCheck.reverse()
             })
             safetyCheckService.getActive().then(check => {
                 this.subTitle = `${check.results.length}/${check.expectedResults} ingevuld`
