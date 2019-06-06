@@ -1,11 +1,7 @@
 <template>
     <ScrollView>
         <FlexboxLayout flexWrap="wrap">
-            <GridLayout rows="auto, auto, *" columns="auto, *" class="card" width="47%" v-for="(item, key) in items" :key="`item-${key}`">
-                <Label row="0" :text="item.title" class="bold" :textWrap="true"/>
-                <Label row="1" :text="item.subTitle || ''" :textWrap="true"/>
-                <Label col="1" rowSpan="3" :text="item.extra || ''" class="subtitle text-right vertical-center bold"/>
-            </GridLayout>
+            <Card width="47%" v-for="(item, key) in items" :key="`item-${key}`" :item="item"/>
         </FlexboxLayout>
     </ScrollView>
 </template>
