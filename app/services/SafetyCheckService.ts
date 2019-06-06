@@ -162,6 +162,8 @@ export default class SafetyCheckService {
                             safetyChecks: safetyChecks
                         })
                         resolve('Bedankt! Het resultaat is ontvangen.')
+                    } else{
+                        reject('Je hebt deze al ingevuld.')
                     }
                 }
             })

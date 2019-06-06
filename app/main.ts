@@ -29,6 +29,14 @@ Vue.component('CardList', CardList)
 Vue.component('ContactSelectList', ContactSelectList)
 Vue.component('CustomActionBar', CustomActionBar)
 
+/* Custom filters */
+
+Vue.filter('dateFormat', function (timestamp) {
+  if (!timestamp) return ''
+  let date = new Date(timestamp)
+  return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
+})
+
 /* Create empty user service */
 Vue.prototype.$currentUserService = new UserService('', '', firebase)
 
