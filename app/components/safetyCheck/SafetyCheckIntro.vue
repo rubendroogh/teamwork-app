@@ -14,7 +14,7 @@
 
 <script lang="ts">
     import SafetyCheckService from '../../services/SafetyCheckService'  
-    import SafetyCheckInput from "./SafetyCheckInput"
+    import SafetyCheckInput from "./SafetyCheckInput.vue"
 
     export default {
         methods: {

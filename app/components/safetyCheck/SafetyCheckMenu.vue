@@ -43,8 +43,8 @@
 
 <script lang="ts">
     import SafetyCheckService from '../../services/SafetyCheckService'
-    import SafetyCheckIntro from './SafetyCheckIntro'
-    import SafetyCheckInput from './SafetyCheckInput'
+    import SafetyCheckIntro from './SafetyCheckIntro.vue'
+    import SafetyCheckInput from './SafetyCheckInput.vue'
 
     export default {
         data() {
