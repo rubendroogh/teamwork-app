@@ -36,6 +36,8 @@
 </template>
 
 <script>
+    import TeamService from '../../services/TeamService'
+
     export default {
         data() {
             return {
@@ -59,8 +61,10 @@
             }
         },
         mounted() {
-            console.dir(this.$currentUserService.getTeams()[0])
-            // this.teamMembers
+            let teamService = new TeamService(this.$firebase)
+            teamService.loadWithDocRef(this.$currentUserService.getTeams()[0]).then( team => {
+                console.dir(team)
+            })
         }
     }
 </script>

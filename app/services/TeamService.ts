@@ -42,7 +42,7 @@ export default class TeamService {
      * @param options {ITeamOptions}
      * @returns Promise<void>
      */
-    public init(options: ITeamOptions): Promise<void> {
+    public create(options: ITeamOptions): Promise<void> {
         return new Promise((resolve, reject) => {
             let teamData = {
                 name: options.name ? options.name : 'A new team',
@@ -52,16 +52,35 @@ export default class TeamService {
             let teamCollection = this.firebase.firestore.collection('teams')
 
             teamCollection.add(teamData).then( docRef => {
-                    this.teamDoc = teamCollection.doc(docRef.id)
-                    this.team.id = docRef.id
-                    
-                    docRef.get().then(doc => {
-                        this.team.name = doc.data().name
-                    })
-    
-                    if (options.members) this.addMembers(options.members).then(() => { resolve() })
+                this.teamDoc = teamCollection.doc(docRef.id)
+                this.team.id = docRef.id
+                
+                docRef.get().then(doc => {
+                    this.team.name = doc.data().name
+                })
+
+                if (options.members) this.addMembers(options.members).then(() => { resolve() })
+            })
+        })
+    }
+
+    /**
+     * @description load team from document reference
+     * 
+     * @param teamDoc {any}
+     * @returns any
+     */
+    public loadWithDocRef(teamDoc: any): Promise<any> {
+        return new Promise((resolve, reject) => {
+            teamDoc.get().then(doc => {
+                if(doc.exists) {
+                    this.team = doc.data()
+                    this.teamDoc = teamDoc
+                    resolve(this.team)
+                } else{
+                    reject('Not found')
                 }
-            )
+            })
         })
     }
 

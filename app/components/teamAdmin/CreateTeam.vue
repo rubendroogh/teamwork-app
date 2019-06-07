@@ -39,7 +39,7 @@
                         name: this.teamName,
                         members: this.members
                     }
-                    team.init(teamOptions).then(() => {
+                    team.create(teamOptions).then(() => {
                         this.$currentUserService.addTeam(team.getReferenceDoc())
                         this.$navigateTo(TeamMenu, {
                             clearHistory: true,
