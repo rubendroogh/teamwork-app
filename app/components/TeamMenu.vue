@@ -21,7 +21,7 @@
                     <Label class="card-title" text="Team test" />
                     <Image src="~/assets/images/team-test-icon.png" class="card-icon" />
                 </Gradient>
-                <Gradient direction="to bottom" colors="#84D258, #6AA549" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(safetyCheckMenu)" >
+                <Gradient direction="to bottom" colors="#84D258, #6AA549" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(meetingMenu)" >
                     <Label class="card-title" text="Vergaderingen" />
                     <Image src="~/assets/images/vergaderingen-icon.png" class="card-icon" />
                 </Gradient>
@@ -39,6 +39,7 @@
     import TestIntroduction from './teamTest/Introduction.vue'
     import SafetyCheckMenu from './safetyCheck/SafetyCheckMenu.vue'
     import CreateTeam from './teamAdmin/CreateTeam.vue'
+    import MeetingMenu from './meetings/MeetingMenu.vue'
 
     export default {
         data() {
@@ -46,6 +47,7 @@
                 teamTestIntroduction: TestIntroduction,
                 safetyCheckMenu: SafetyCheckMenu,
                 createTeam: CreateTeam,
+                meetingMenu: MeetingMenu,
                 hasTeam: false,
                 currentTeam: {
                     id: '',
