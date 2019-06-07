@@ -15,16 +15,20 @@
                 <TextField/>
             </StackLayout>
 
-            <GridLayout row="2" colSpan="4" rows="auto, auto" columns="*, *, *, *" v-if="currentStep == 2">
-                <Label  colSpan="3" text="Willekeurige leider en voorzitter?" class="subtitle" height="18"/>
-                <Switch col="3" v-model="randomRoles"/>
-                <StackLayout v-if="randomRoles"  row="1" colSpan="4">
-                    <Label text="Leider" class="subtitle"/>
-                    <ListPicker :items="steps" v-model="selectedItem"/>
-                    <Label text="Notulist" class="subtitle"/>
-                    <ListPicker :items="steps" v-model="selectedItem"/>
-                </StackLayout>
-            </GridLayout>
+            <ScrollView row="2" colSpan="4" v-if="currentStep == 2">
+                <GridLayout rows="auto, auto" columns="*, *, *, *">
+                    <Label colSpan="3" text="Willekeurige voorzitter en notulist?" class="subtitle" height="18"/>
+                    <Switch col="3" v-model="randomRoles" class="mb-3"/>
+                    <StackLayout v-if="!randomRoles"  row="1" col="0" colSpan="2">
+                        <Label text="Voorzitter" class="subtitle text-center"/>
+                        <ListPicker :items="steps" v-model="selectedItem"/>
+                    </StackLayout>
+                    <StackLayout v-if="!randomRoles"  row="1" col="2" colSpan="2">
+                        <Label text="Notulist" class="subtitle text-center"/>
+                        <ListPicker :items="steps" v-model="selectedItem"/>
+                    </StackLayout>
+                </GridLayout>
+            </ScrollView>
 
             <Button row="3" colSpan="4" text="Volgende stap" @tap="currentStep += 1"/>
         </GridLayout>
@@ -50,8 +54,13 @@
                     leader: {},
                     secretary: {},
                     agendaItems: []
-                }
+                },
+                teamMembers: []
             }
+        },
+        mounted() {
+            console.dir(this.$currentUserService.getTeams()[0])
+            // this.teamMembers
         }
     }
 </script>

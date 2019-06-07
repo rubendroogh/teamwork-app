@@ -25,7 +25,7 @@
                     <Label class="card-title" text="Vergaderingen" />
                     <Image src="~/assets/images/vergaderingen-icon.png" class="card-icon" />
                 </Gradient>
-            </StackLayout>  
+            </StackLayout>
         </GridLayout>
         <GridLayout v-else class="container" rows="*, auto, auto, *, auto">
             <Label row="1" text="🏝" class="big-emoji"/>

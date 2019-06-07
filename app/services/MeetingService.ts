@@ -17,3 +17,5 @@ export interface IAgendaItem{
     addedBy: any //user ref
     reference?: ISafetyCheck | IEvent | ITestResults
 }
+
+// TODO: validation
