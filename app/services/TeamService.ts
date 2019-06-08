@@ -99,10 +99,17 @@ export default class TeamService {
     }
 
     /**
-     * @returns Array<any>
+     * @returns Promise<Array<any>>
      */
-    public getMembers(): Array<any> {
-        return this.team.members
+    public getMembers(): Promise<Array<any>> {
+        console.log('test')
+        return new Promise((resolve, reject) => {
+            this.team.members.forEach( member => {
+                member.get().then( doc => {
+                    console.dir(doc.data())
+                })
+            })
+        })
     }
 
     /**

@@ -21,11 +21,11 @@
                     <Switch col="3" v-model="randomRoles" class="mb-3"/>
                     <StackLayout v-if="!randomRoles"  row="1" col="0" colSpan="2">
                         <Label text="Voorzitter" class="subtitle text-center"/>
-                        <ListPicker :items="steps" v-model="selectedItem"/>
+                        <ListPicker :items="teamMembers" v-model="selectedItem"/>
                     </StackLayout>
                     <StackLayout v-if="!randomRoles"  row="1" col="2" colSpan="2">
                         <Label text="Notulist" class="subtitle text-center"/>
-                        <ListPicker :items="steps" v-model="selectedItem"/>
+                        <ListPicker :items="teamMembers" v-model="selectedItem"/>
                     </StackLayout>
                 </GridLayout>
             </ScrollView>
@@ -62,8 +62,10 @@
         },
         mounted() {
             let teamService = new TeamService(this.$firebase)
-            teamService.loadWithDocRef(this.$currentUserService.getTeams()[0]).then( team => {
-                console.dir(team)
+            teamService.loadWithDocRef(this.$currentUserService.getTeams()[0]).then( () => {
+                teamService.getMembers.then( members => {
+                    console.dir(members)
+                })
             })
         }
     }
