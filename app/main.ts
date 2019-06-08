@@ -40,7 +40,7 @@ Vue.filter('dateFormat', function (timestamp) {
 })
 
 /* Create empty user service */
-Vue.prototype.$currentUserService = new UserService('', '', firebase)
+Vue.prototype.$currentUserService = new UserService(firebase)
 
 /* Firebase initialization */
 Vue.prototype.$firebase = firebase

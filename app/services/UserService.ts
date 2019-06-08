@@ -20,10 +20,8 @@ export default class UserService {
      * @param number {string}
      * @param firebaseRef {any}
      */
-    constructor(uid: string, number: string, firebaseRef: any) {
+    constructor(firebaseRef: any) {
         this.firebase = firebaseRef
-
-        if (uid !== '' && number !== '') this.loadWithUid(uid, number)
     }
 
     /**
