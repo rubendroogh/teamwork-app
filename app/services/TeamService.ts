@@ -99,16 +99,23 @@ export default class TeamService {
     }
 
     /**
+     * @todo finish function
      * @returns Promise<Array<any>>
      */
     public getMembers(): Promise<Array<any>> {
-        console.log('test')
         return new Promise((resolve, reject) => {
-            this.team.members.forEach( member => {
+            let membersData = new Array()
+
+            for (let i = 0; i < this.team.members.length; i++) {
+                const member = this.team.members[i]
+            
                 member.get().then( doc => {
-                    console.dir(doc.data())
+                    if (doc.exists) membersData.push(doc.data())
+                    if(i == this.team.members.length - 1) {
+                        resolve(membersData)
+                    }
                 })
-            })
+            }
         })
     }
 
