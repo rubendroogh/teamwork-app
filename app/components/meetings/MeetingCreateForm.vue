@@ -3,34 +3,43 @@
         <CustomActionBar title="Vergadering"/>
         <GridLayout rows="auto, auto, *, auto" columns="*, *, *, *" class="container">
             <Label row="0" colSpan="4" :text="steps[currentStep-1]" class="title text-center"/>
-            <StackLayout @tap="currentStep = (index + 1)" row="1" :col="index" v-for="(stepName, index) in steps" :key="`item-${index}`">
+            <StackLayout @tap="changeStep(index + 1)" row="1" :col="index" v-for="(stepName, index) in steps" :key="`item-${index}`">
                 <Label :text="index + 1" class="step" :class="{ 'step-active': currentStep == (index + 1) }"/>
                 <Label :text="stepName" class="text-center step-title"/>
             </StackLayout>
 
-            <StackLayout row="2" colSpan="4" v-if="currentStep == 1">
+            <StackLayout row="2" colSpan="4" v-show="currentStep === 1">
                 <Label text="Onderwerp vergadering*" class="subtitle"/>
-                <TextField/>
+                <TextField v-model="meeting.subject"/>
                 <Label text="Doel vergadering*" class="subtitle"/>
-                <TextField/>
+                <TextField v-model="meeting.purpose"/>
             </StackLayout>
 
-            <ScrollView row="2" colSpan="4" v-if="currentStep == 2">
+            <ScrollView row="2" colSpan="4" v-show="currentStep === 2">
                 <GridLayout rows="auto, auto" columns="*, *, *, *">
                     <Label colSpan="3" text="Willekeurige voorzitter en notulist?" class="subtitle" height="18"/>
                     <Switch col="3" v-model="randomRoles" class="mb-3"/>
                     <StackLayout v-if="!randomRoles"  row="1" col="0" colSpan="2">
                         <Label text="Voorzitter" class="subtitle text-center"/>
-                        <ListPicker :items="teamMembers" v-model="selectedItem"/>
+                        <ListPicker :items="teamMemberNames" v-model="leaderIndex"/>
                     </StackLayout>
                     <StackLayout v-if="!randomRoles"  row="1" col="2" colSpan="2">
                         <Label text="Notulist" class="subtitle text-center"/>
-                        <ListPicker :items="teamMembers" v-model="selectedItem"/>
+                        <ListPicker :items="teamMemberNames" v-model="secretaryIndex"/>
                     </StackLayout>
                 </GridLayout>
             </ScrollView>
 
-            <Button row="3" colSpan="4" text="Volgende stap" @tap="currentStep += 1"/>
+            <ScrollView row="2" colSpan="4" v-show="currentStep === 4">
+                <StackLayout>
+                    <Label text="Datum*" class="subtitle"/>
+                    <DatePicker v-model="startDate"/>
+                    <Label text="Begintijd*" class="subtitle"/>
+                    <TimePicker v-model="startTime"/>
+                </StackLayout>
+            </ScrollView>
+
+            <Button row="3" colSpan="4" :text="buttonText" @tap="(currentStep < steps.length) ? changeStep(currentStep + 1) : saveMeeting()"/>
         </GridLayout>
     </Page>
 </template>
@@ -57,16 +66,64 @@
                     secretary: {},
                     agendaItems: []
                 },
-                teamMembers: []
+                teamMembers: [],
+                teamMemberNames: [],
+                leaderIndex: null,
+                secretaryIndex: null,
+                buttonText: 'Volgende stap',
+                startDate: new Date(),
+                startTime: new Date()
             }
         },
         mounted() {
             let teamService = new TeamService(this.$firebase)
             teamService.loadWithDocRef(this.$currentUserService.getTeams()[0]).then( () => {
-                teamService.getMembers.then( members => {
-                    console.dir(members)
+                teamService.getMembers().then( members => {
+                    this.teamMembers = members
+                    this.teamMemberNames = members.map( member => {
+                        return member.name
+                    })
                 })
             })
+        },
+        methods: {
+            changeStep(newStep) {
+                this.currentStep = newStep
+                console.log(this.currentStep)
+                this.buttonText = (this.currentStep == this.steps.length) ? 'Opslaan' : 'Volgende stap'
+            },
+            saveMeeting() {
+                if (this.randomRoles) this.chooseRandomRoles()
+
+                let startDateTime = this.startDate
+                startDateTime.setHours(this.startTime.getHours())
+                startDateTime.setMinutes(this.startTime.getMinutes())
+
+                this.meeting.startTime = startDateTime
+
+                console.log(this.meeting.startTime)
+            },
+            chooseRandomRoles() {
+                // random leader and secretary from members array, ensuring they are not the same
+                let leaderIndex = Math.floor(Math.random() * this.teamMembers.length)
+                let secretaryIndex = Math.floor(Math.random() * this.teamMembers.length)
+
+                while (leaderIndex == secretaryIndex) {
+                    secretaryIndex = Math.floor(Math.random() * this.teamMembers.length)
+                }
+
+                this.meeting.leader = this.teamMembers[leaderIndex]
+                this.meeting.secretary = this.teamMembers[secretaryIndex]
+            }
+        },
+        computed: {
+            selectedLeader() {
+                return this.teamMembers[leaderIndex]
+            },
+
+            selectedSecretary() {
+                return this.teamMembers[secretaryIndex]
+            }
         }
     }
 </script>
