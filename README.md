@@ -1,6 +1,6 @@
 # Teamwork App 
 
-> The best teamwork app.
+> A Nativescript-Vue app that helps with organizing meetings and measuring team performance.
 
 ## Usage
 
@@ -17,3 +17,4 @@ tns debug <platform> --bundle
 # Build, watch for changes and run the application
 tns run <platform> --bundle
 ```
+
