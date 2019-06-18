@@ -89,17 +89,17 @@
         methods: {
             changeStep(newStep) {
                 this.currentStep = newStep
-                console.log(this.currentStep)
                 this.buttonText = (this.currentStep == this.steps.length) ? 'Opslaan' : 'Volgende stap'
             },
             saveMeeting() {
-                if (this.randomRoles) this.chooseRandomRoles()
+                if (this.randomRoles) {
+                    this.chooseRandomRoles()
+                } else {
+                    this.meeting.leader = this.selectedLeader
+                    this.meeting.secretary = this.selectedSecretary
+                }
 
-                let startDateTime = this.startDate
-                startDateTime.setHours(this.startTime.getHours())
-                startDateTime.setMinutes(this.startTime.getMinutes())
-
-                this.meeting.startTime = startDateTime
+                this.meeting.startTime = this.calculateStartDateTime()
 
                 console.log(this.meeting.startTime)
             },
@@ -114,6 +114,13 @@
 
                 this.meeting.leader = this.teamMembers[leaderIndex]
                 this.meeting.secretary = this.teamMembers[secretaryIndex]
+            },
+            calculateStartDateTime() {
+                let startDateTime = this.startDate
+                startDateTime.setHours(this.startTime.getHours())
+                startDateTime.setMinutes(this.startTime.getMinutes())
+
+                return startDateTime
             }
         },
         computed: {
