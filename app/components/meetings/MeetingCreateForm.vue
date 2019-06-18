@@ -68,6 +68,7 @@
 
 <script>
     import TeamService from '../../services/TeamService'
+    import MeetingService from '../../services/MeetingService'
 
     export default {
         data() {
@@ -118,13 +119,16 @@
                 if (this.randomRoles) {
                     this.chooseRandomRoles()
                 } else {
-                    this.meeting.leader = this.selectedLeader
-                    this.meeting.secretary = this.selectedSecretary
+                    this.meeting.leader = this.selectedLeader.name
+                    this.meeting.secretary = this.selectedSecretary.name
                 }
 
                 this.meeting.startTime = this.calculateStartDateTime()
 
-                console.dir(this.meeting)
+                const meetingService = new MeetingService(this.$firebase, this.$currentUserService.getTeams()[0])
+                meetingService.create(this.meeting).then(meeting => {
+                    this.$navigateBack()
+                })
             },
             chooseRandomRoles() {
                 // random leader and secretary from members array, ensuring they are not the same
@@ -135,15 +139,16 @@
                     secretaryIndex = Math.floor(Math.random() * this.teamMembers.length)
                 }
 
-                this.meeting.leader = this.teamMembers[leaderIndex]
-                this.meeting.secretary = this.teamMembers[secretaryIndex]
+                this.meeting.leader = this.teamMembers[leaderIndex].name
+                this.meeting.secretary = this.teamMembers[secretaryIndex].name
             },
             calculateStartDateTime() {
                 let startDateTime = this.startDate
                 startDateTime.setHours(this.startTime.getHours())
                 startDateTime.setMinutes(this.startTime.getMinutes())
 
-                return startDateTime
+                // To UNIX timestamp
+                return Math.round(startDateTime.getTime() / 1000)
             },
             addAgendaItem() {
                 if (this.newAgendaItem !== '') {
