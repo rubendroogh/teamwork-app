@@ -38,12 +38,12 @@ export default class SafetyCheckService {
     }
 
     /**
-     * addNewToTeam
+     * create
      * 
      * @description adds a new safety check to a team and sets it to active
      * @returns Promise<ISafetyCheck>
      */
-    public addNewToTeam(): Promise<ISafetyCheck> {
+    public create(): Promise<ISafetyCheck> {
         return new Promise((resolve, reject) => {
             this.teamRef.get().then(doc => {
                 this.safetyCheck.expectedResults = doc.data().members.length
