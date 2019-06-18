@@ -2,12 +2,14 @@
     <Page>
         <CustomActionBar title="Vergadering"/>
         <GridLayout rows="auto, auto, *, auto" columns="*, *, *, *" class="container">
+
             <Label row="0" colSpan="4" :text="steps[currentStep-1]" class="title text-center"/>
             <StackLayout @tap="changeStep(index + 1)" row="1" :col="index" v-for="(stepName, index) in steps" :key="`item-${index}`">
                 <Label :text="index + 1" class="step" :class="{ 'step-active': currentStep == (index + 1) }"/>
                 <Label :text="stepName" class="text-center step-title"/>
             </StackLayout>
 
+            <!-- Subject and purpose step -->
             <StackLayout row="2" colSpan="4" v-show="currentStep === 1">
                 <Label text="Onderwerp vergadering*" class="subtitle"/>
                 <TextField v-model="meeting.subject"/>
@@ -15,6 +17,7 @@
                 <TextField v-model="meeting.purpose"/>
             </StackLayout>
 
+            <!-- Roles step -->
             <ScrollView row="2" colSpan="4" v-show="currentStep === 2">
                 <GridLayout rows="auto, auto" columns="*, *, *, *">
                     <Label colSpan="3" text="Willekeurige voorzitter en notulist?" class="subtitle" height="18"/>
@@ -30,6 +33,25 @@
                 </GridLayout>
             </ScrollView>
 
+            <!-- Agenda items step -->
+            <GridLayout rows="auto, *, auto, *" row="2" colSpan="4" v-show="currentStep === 3">
+                <Label row="0" text="Agenda punten" class="subtitle"/>
+                <GridLayout row="1" rows="*, auto" columns="*, auto">
+                    <ListView row="0" colSpan="2" for="(item, index) in meeting.agendaItems">
+                        <v-template>
+                            <GridLayout columns="*, auto">
+                                <Label col="0" :text="item.description" class="list-item"/>
+                                <Label col="1" text="X" class="list-item" @tap="removeAgendaItem(index)"/>
+                            </GridLayout>
+                        </v-template>
+                    </ListView>
+                    <TextField v-model="newAgendaItem" row="1" margin="10"/>
+                    <Button text="+" row="1" col="1" @tap="addAgendaItem()"/>
+                </GridLayout>
+                <Label row="2" text="Kies uit selectie" class="subtitle"/>
+            </GridLayout>
+
+            <!-- Date and time step -->
             <ScrollView row="2" colSpan="4" v-show="currentStep === 4">
                 <StackLayout>
                     <Label text="Datum*" class="subtitle"/>
@@ -72,7 +94,8 @@
                 secretaryIndex: null,
                 buttonText: 'Volgende stap',
                 startDate: new Date(),
-                startTime: new Date()
+                startTime: new Date(),
+                newAgendaItem: ''
             }
         },
         mounted() {
@@ -101,7 +124,7 @@
 
                 this.meeting.startTime = this.calculateStartDateTime()
 
-                console.log(this.meeting.startTime)
+                console.dir(this.meeting)
             },
             chooseRandomRoles() {
                 // random leader and secretary from members array, ensuring they are not the same
@@ -121,13 +144,26 @@
                 startDateTime.setMinutes(this.startTime.getMinutes())
 
                 return startDateTime
+            },
+            addAgendaItem() {
+                if (this.newAgendaItem !== '') {
+                    let newItem = {}
+                    newItem['description'] = this.newAgendaItem
+                    newItem['addedBy'] = this.$currentUserService.getUserDoc()
+
+                    this.meeting.agendaItems.push(newItem)
+                }
+
+                this.newAgendaItem = ''
+            },
+            removeAgendaItem(index) {
+                this.meeting.agendaItems.splice(index, 1)
             }
         },
         computed: {
             selectedLeader() {
                 return this.teamMembers[leaderIndex]
             },
-
             selectedSecretary() {
                 return this.teamMembers[secretaryIndex]
             }
