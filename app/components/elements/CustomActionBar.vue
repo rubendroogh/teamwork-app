@@ -1,5 +1,6 @@
 <template>
     <ActionBar class="action-bar">
+        <NavigationButton text="Go back" v-if="!noBack" android.systemIcon="ic_menu_back" @tap="$navigateBack()" />
         <StackLayout orientation="horizontal">
             <Label :text="title" class="title" fontSize="20" verticalAlignment="center" margin="0"/>
         </StackLayout>
@@ -11,14 +12,10 @@
 <script>
     export default {
         props: [
-            'title'
-        ],
-        data() {
-            return {
-               
-            };
-        }
-    };
+            'title',
+            'noBack'
+        ]
+    }
 </script>
 
 <style lang="scss" scoped>

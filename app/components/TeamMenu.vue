@@ -1,6 +1,6 @@
 <template>
     <Page>
-        <CustomActionBar :title="currentTeam.name ? currentTeam.name : 'Team Menu'"/>
+        <CustomActionBar :noBack="true" :title="currentTeam.name ? currentTeam.name : 'Team Menu'"/>
         <GridLayout v-if="hasTeam" columns="*,*" rows="*" class="container" verticalAlignment="top">
             <StackLayout col="0" >
                 <!-- <Gradient direction="to bottom" colors="#2DA9EE, #328C98" height="100" borderRadius="10" padding="10" margin="5" @tap="$navigateTo(teamTestIntroduction)" >
