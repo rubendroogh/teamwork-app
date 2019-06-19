@@ -130,6 +130,13 @@ Button{
     border-radius: 50%;
 }
 
+.button-secondary{
+    background-color: $white;
+    border-width: 1;
+    border-color: #008FEF;
+    color: $black;
+}
+
 .fab-button {
     height: 50;
     width: 50; /// this is required on iOS - Android does not require width

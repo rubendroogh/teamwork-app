@@ -46,9 +46,14 @@
                         </v-template>
                     </ListView>
                     <TextField v-model="newAgendaItem" row="1" margin="10"/>
-                    <Button text="+" row="1" col="1" @tap="addAgendaItem()"/>
+                    <Button text="+" row="1" col="1" @tap="addAgendaItem(newAgendaItem)"/>
                 </GridLayout>
                 <Label row="2" text="Kies uit selectie" class="subtitle"/>
+                <GridLayout row="3" colSpan="2" rows="*, *" columns="*, *">
+                    <Button class="button-secondary m-1" text="Safety checks" row="0" col="0" @tap="selectSafetyCheck()"/>
+                    <Button class="button-secondary m-1" text="Teamtest" row="0" col="1" @tap="selectSafetyCheck()"/>
+                    <Button class="button-secondary m-1" text="Evenementen" row="1" col="0" @tap="selectSafetyCheck()"/>
+                </GridLayout>
             </GridLayout>
 
             <!-- Date and time step -->
@@ -67,6 +72,7 @@
 </template>
 
 <script>
+    import SafetyCheckSelect from '../elements/SafetyCheckSelect'
     import TeamService from '../../services/TeamService'
     import MeetingService from '../../services/MeetingService'
 
@@ -148,12 +154,12 @@
                 startDateTime.setMinutes(this.startTime.getMinutes())
 
                 // To UNIX timestamp
-                return Math.round(startDateTime.getTime() / 1000)
+                return Math.round(startDateTime.getTime())
             },
-            addAgendaItem() {
-                if (this.newAgendaItem !== '') {
+            addAgendaItem(description) {
+                if (description !== '') {
                     let newItem = {}
-                    newItem['description'] = this.newAgendaItem
+                    newItem['description'] = description
                     newItem['addedBy'] = this.$currentUserService.getUserDoc()
 
                     this.meeting.agendaItems.push(newItem)
@@ -163,6 +169,13 @@
             },
             removeAgendaItem(index) {
                 this.meeting.agendaItems.splice(index, 1)
+            },
+            selectSafetyCheck() {
+                this.$showModal(SafetyCheckSelect).then( check => {
+                    let date = new Date(check.createdAt)
+                    let agendaDescription = `Safety check: ${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}: ${date.getHours()}:${date.getMinutes()}`
+                    this.addAgendaItem(agendaDescription)
+                })
             }
         },
         computed: {
