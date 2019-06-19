@@ -39,6 +39,12 @@ Vue.filter('dateFormat', function (timestamp) {
   return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
 })
 
+Vue.filter('dateTimeFormat', function (timestamp) {
+  if (!timestamp) return ''
+  let date = new Date(timestamp)
+  return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}: ${date.getHours()}:${date.getMinutes()}`
+})
+
 /* Create empty user service */
 Vue.prototype.$currentUserService = new UserService(firebase)
 
