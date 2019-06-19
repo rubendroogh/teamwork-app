@@ -73,5 +73,24 @@ export default class MeetingService {
         })
     }
 
+    /**
+     * getAllFromTeam
+     * 
+     * @description get all meetings from current team
+     * 
+     * @returns Promise<Array<IMeeting>>
+     */
+    public getAllFromTeam(): Promise<Array<IMeeting>> {
+        return new Promise((resolve, reject) => {
+            this.teamRef.get().then(teamDoc => {
+                if (teamDoc.data().meetings) {
+                    resolve(teamDoc.data().meetings)
+                } else{
+                    reject('No meetings found')
+                }
+            })
+        })
+    }
+
 }
 // TODO: validation
