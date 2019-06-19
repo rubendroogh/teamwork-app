@@ -99,7 +99,6 @@ export default class TeamService {
     }
 
     /**
-     * @todo finish function
      * @returns Promise<Array<any>>
      */
     public getMembers(): Promise<Array<any>> {

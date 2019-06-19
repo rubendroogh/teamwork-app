@@ -116,9 +116,9 @@ export default class SafetyCheckService {
      * 
      * @description get all safety checks from current team
      * 
-     * @returns Promise<Array<any>>
+     * @returns Promise<Array<ISafetyCheck>>
      */
-    public getAllFromTeam(): Promise<Array<any>> {
+    public getAllFromTeam(): Promise<Array<ISafetyCheck>> {
         return new Promise((resolve, reject) => {
             this.teamRef.get().then(teamDoc => {
                 if (teamDoc.data().safetyChecks) {
